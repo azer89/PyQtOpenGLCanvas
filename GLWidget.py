@@ -7,8 +7,11 @@ import sys
 #import pdb
 
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader, QGLFormat, QGLContext, QGLWidget
-from PyQt4.QtGui import QMatrix4x4
+#from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader, QGLFormat, QGLContext, QGLWidget
+from PyQt4.QtOpenGL import *
+from PyQt4.QtGui import *
+#from PyQt4.QtGui import QMatrix4x4 #, QOpenGLBuffer, QOpenGLVertexArrayObject
+
 
 from Utility import *
 
@@ -40,7 +43,8 @@ class GLWidget(QtOpenGL.QGLWidget):
         else:
             QGLWidget.__init__(self, parent)
         
-        self.backColor = QtGui.QColor.fromRgbF(1.0, 0.0, 0.0, 1.0)
+        self.backColor = QtGui.QColor.fromRgbF(1.0, 1.0, 1.0, 1.0)
+
         
     def minimumSizeHint(self):
         return QtCore.QSize(50, 50)
@@ -59,7 +63,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         print self._shaderProgram.log()
         self._shaderProgram.bind() # or link()
         
-        
         self._mvpMatrixLocation  = self._shaderProgram.uniformLocation("mvpMatrix")
         self._colorLocation      = self._shaderProgram.attributeLocation("vertexColor")
         self._vertexLocation     = self._shaderProgram.attributeLocation("vert")
@@ -67,12 +70,46 @@ class GLWidget(QtOpenGL.QGLWidget):
                 
         
         self.qglClearColor(self.backColor)
-        GL.glEnable(GL.GL_BLEND);
-        GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+        GL.glEnable(GL.GL_BLEND)
+        GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
         GL.glEnable(GL.GL_DEPTH_TEST)
-        
+
         #print self.width()
         #print self.height()
+
+        """
+        // points
+        QOpenGLBuffer            _pointsVbo;
+        QOpenGLVertexArrayObject _pointsVao;
+
+        // lines
+        QOpenGLBuffer            _linesVbo;
+        QOpenGLVertexArrayObject _linesVao;
+        """
+
+    def createPoints(self):
+
+        # generate points
+        self._points = []
+
+        centerX = self.width() / 2.0
+        centerY = self.height() / 2.0
+        radius = 5.0
+        n_slice = 8
+        add_value = np.pi * 2.0 / n_slice
+        thetas = np.arange(0.0, np.pi * 2.0, add_value)
+        points = []
+        for t in thetas:
+            xPt = centerX + radius * np.sin(t)
+            yPt = centerY + radius * np.cos(t)
+            points.append(np.array([xPt, yPt]))
+
+        self._pointsVao = GL.glGenVertexArrays(1)
+        self._pointsVbo = GL.glGenBuffers(1)
+
+        # bind VAO
+        GL.glBindVertexArray(self._pointsVao)
+
     
     def paintGL(self):
         print "paint"
@@ -81,10 +118,21 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glViewport(0, 0, self.width(),  self.height())  
         
         #pdb.set_trace()
-        
-        #orthoMatrix = QMatrix4x4.ortho(0.0, self.width(), self.height(), 0, -100, 100)
-        #transformMatrix = QMatrix4x4.setToIdentity()
-        #self._shaderProgram.setUniformValue(self._mvpMatrixLocation, orthoMatrix * transformMatrix)
+        #orthoMatrix = QMatrix4x4()
+
+        #orthoMatrix = QMatrix4x4().ortho(0.0, self.width(), self.height(), 0, -100, 100)
+        #transformMatrix = QMatrix4x4().setToIdentity()
+
+        orthoMatrix = QMatrix4x4()
+        orthoMatrix.ortho(0.0, self.width(), self.height(), 0, -100, 100)
+
+        transformMatrix = QMatrix4x4()
+        transformMatrix.setToIdentity()
+
+        mpvMatrix = orthoMatrix * transformMatrix
+        self._shaderProgram.setUniformValue(self._mvpMatrixLocation, mpvMatrix)
+
+        #print mpvMatrix
         
         #print orthoMatrix
         #print transformMatrix        
