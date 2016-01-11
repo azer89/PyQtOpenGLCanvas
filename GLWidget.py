@@ -1,36 +1,52 @@
-
-"""
-GLWidget
-"""
-
 import sys
-#import pdb
+import numpy
+from OpenGL.GL import *
 
-from PyQt4 import QtCore, QtGui, QtOpenGL
-#from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader, QGLFormat, QGLContext, QGLWidget
+from PyQt4.QtGui import QWidget
+from PyQt4 import QtGui, QtCore
+
+from PyQt4 import QtGui, QtOpenGL
+
 from PyQt4.QtOpenGL import *
 from PyQt4.QtGui import *
-#from PyQt4.QtGui import QMatrix4x4 #, QOpenGLBuffer, QOpenGLVertexArrayObject
+#from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
+#from PyQt4.QtGui import QMatrix4x4
 
 
-from Utility import *
-
+vertex_shader = """#version 330
+in vec2 uv;
+in vec4 position;
+in vec4 color;
+out vec2 theUV;
+out vec4 theColor;
+uniform mat4 mvpMatrix;
+void main()
+{
+    gl_Position = mvpMatrix * position;
+    theUV = uv;
+    theColor = color;
+}
 """
-Importing OpenGL
+
+
+fragment_shader = """#version 330
+in vec2 theUV;
+in vec4 theColor;
+out vec4 outputColor;
+uniform float use_color;
+uniform sampler2D base_texture;
+void main()
+{
+    outputColor = texture2D(base_texture, theUV);
+    if(use_color > 0.5)
+    {
+     	outputColor = theColor;
+    }
+}
 """
-try:
-    from OpenGL import GL
-except ImportError:
-    print "You need to install PyOpenGL"
-    sys.exit(1)
-else:
-    print "OpenGL OK"
+
 
 class GLWidget(QtOpenGL.QGLWidget):
-    """
-    Class GLWidget
-    """
-    
     def __init__(self, parent = None):
         if hasattr(QGLFormat, 'setVersion'):
             # Modern OpenGL
@@ -42,116 +58,96 @@ class GLWidget(QtOpenGL.QGLWidget):
             print "Version is set to 3.3"
         else:
             QGLWidget.__init__(self, parent)
-        
-        self.backColor = QtGui.QColor.fromRgbF(1.0, 1.0, 1.0, 1.0)
 
-        
-    def minimumSizeHint(self):
-        return QtCore.QSize(50, 50)
-    
-    def sizeHint(self):
-        return QtCore.QSize(1024, 768)
-    
+
     def initializeGL(self):
-        
-        # shaders
+        glEnable(GL_DEPTH_TEST)
+        glEnable(GL_CULL_FACE)
+
+        glViewport(0, 0, self.width(), self.height())
+
         self._shaderProgram = QGLShaderProgram()
-        if self._shaderProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
+
+        if self._shaderProgram.addShaderFromSourceCode(QGLShader.Vertex, vertex_shader) :
             print "Vertex shader OK"
-        if self._shaderProgram.addShaderFromSourceFile(QGLShader.Fragment, "shader.frag") :
+
+        if self._shaderProgram.addShaderFromSourceCode(QGLShader.Fragment, fragment_shader) :
             print "Fragment shader OK"
-        print self._shaderProgram.log()
-        self._shaderProgram.bind() # or link()
-        
-        self._mvpMatrixLocation  = self._shaderProgram.uniformLocation("mvpMatrix")
-        self._colorLocation      = self._shaderProgram.attributeLocation("vertexColor")
-        self._vertexLocation     = self._shaderProgram.attributeLocation("vert")
+
+        # texture
+        self._ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
+
+        self._shaderProgram.link()
+
+        self._texCoordLocation   = self._shaderProgram.attributeLocation("uv")
+        self._vertexLocation     = self._shaderProgram.attributeLocation("position")
+        self._colorLocation      = self._shaderProgram.attributeLocation("color")
+
         self._use_color_location = self._shaderProgram.uniformLocation("use_color")
-                
-        
-        self.qglClearColor(self.backColor)
-        GL.glEnable(GL.GL_BLEND)
-        GL.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA)
-        GL.glEnable(GL.GL_DEPTH_TEST)
+        self._mvpMatrixLocation  = self._shaderProgram.uniformLocation("mvpMatrix")
 
-        #print self.width()
-        #print self.height()
+                                # position
+        vertexData = numpy.array([250.0,  20.0, 0.0, 1.0,
+                                  100.0, 300.0, 0.0, 1.0,
+                                  560.0, 400.0, 0.0, 1.0,
 
-        """
-        // points
-        QOpenGLBuffer            _pointsVbo;
-        QOpenGLVertexArrayObject _pointsVao;
+                                # uv
+                                0.0, 1.0,
+                                0.0, 0.0,
+                                1.0, 0.0],
+                                dtype = numpy.float32)
 
-        // lines
-        QOpenGLBuffer            _linesVbo;
-        QOpenGLVertexArrayObject _linesVao;
-        """
+        colorData = numpy.array([1.0, 0.0, 0.0, 1.0,
+                                 0.0, 0.0, 1.0, 1.0,
+                                 0.0, 1.0, 0.0, 1.0],
+                                 dtype = numpy.float32)
 
-    def createPoints(self):
+        # create VAO
+        self.VAO = glGenVertexArrays(1)
+        glBindVertexArray(self.VAO)
 
-        # generate points
-        self._points = []
+        # create a VBO for position and uv
+        posVBO = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, posVBO)
+        glBufferData(GL_ARRAY_BUFFER, vertexData.nbytes, vertexData, GL_STATIC_DRAW)
+        glEnableVertexAttribArray(self._vertexLocation)
+        glVertexAttribPointer(self._vertexLocation, 4, GL_FLOAT, GL_FALSE, 0, None)
 
-        centerX = self.width() / 2.0
-        centerY = self.height() / 2.0
-        radius = 5.0
-        n_slice = 8
-        add_value = np.pi * 2.0 / n_slice
-        thetas = np.arange(0.0, np.pi * 2.0, add_value)
-        points = []
-        for t in thetas:
-            xPt = centerX + radius * np.sin(t)
-            yPt = centerY + radius * np.cos(t)
-            points.append(np.array([xPt, yPt]))
+        glEnableVertexAttribArray(self._texCoordLocation)
+        glVertexAttribPointer(self._texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(48))
 
-        self._pointsVao = GL.glGenVertexArrays(1)
-        self._pointsVbo = GL.glGenBuffers(1)
+        # create VBO for color
+        colVBO = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, colVBO)
+        glBufferData(GL_ARRAY_BUFFER, colorData.nbytes, colorData, GL_STATIC_DRAW)
+        glEnableVertexAttribArray(self._colorLocation)
+        glVertexAttribPointer(self._colorLocation,    4, GL_FLOAT, GL_FALSE, 0, None)
 
-        # bind VAO
-        GL.glBindVertexArray(self._pointsVao)
+        # unbind vao and vbo
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        glBindVertexArray(0)
 
-    
+
     def paintGL(self):
-        print "paint"
-        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-        
-        GL.glViewport(0, 0, self.width(),  self.height())  
-        
-        #pdb.set_trace()
-        #orthoMatrix = QMatrix4x4()
-
-        #orthoMatrix = QMatrix4x4().ortho(0.0, self.width(), self.height(), 0, -100, 100)
-        #transformMatrix = QMatrix4x4().setToIdentity()
+        glClearColor(0, 0, 0, 1)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         orthoMatrix = QMatrix4x4()
-        orthoMatrix.ortho(0.0, self.width(), self.height(), 0, -100, 100)
-
+        orthoMatrix.ortho(0.0, self.width() , self.height(), 0, -100, 100)
         transformMatrix = QMatrix4x4()
         transformMatrix.setToIdentity()
-
         mpvMatrix = orthoMatrix * transformMatrix
+
+        # activate shader program
+        self._shaderProgram.bind()
+        self._shaderProgram.setUniformValue(self._use_color_location, 0.0)
+        glBindTexture(GL_TEXTURE_2D, self._ori_tex)
         self._shaderProgram.setUniformValue(self._mvpMatrixLocation, mpvMatrix)
 
-        #print mpvMatrix
-        
-        #print orthoMatrix
-        #print transformMatrix        
-        #GL.glLoadIdentity()
-        
-    def updateGL(self):
-        pass
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        glBindVertexArray(self.VAO)
+
+        # draw triangle
+        glDrawArrays(GL_TRIANGLES, 0, 9)
+
+        glBindVertexArray(0)
+        glUseProgram(0)
