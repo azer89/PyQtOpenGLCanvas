@@ -1,15 +1,15 @@
-#version 330 
+#version 330
 
-in vec3 vert;
 in vec2 uv;
-in vec3 vertexColor;
-out vec2 varying_uv;
-out vec3 varying_color;
+in vec4 position;
+in vec4 color;
+out vec2 theUV;
+out vec4 theColor;
 uniform mat4 mvpMatrix;
 
 void main()
-{	
-    gl_Position = mvpMatrix * vec4(vert, 1.0);
-    varying_uv = uv;
-    varying_color = vertexColor;
+{
+    gl_Position = mvpMatrix * position;
+    theUV = uv;
+    theColor = color;
 }

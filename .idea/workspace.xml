@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a10b2903-b1ef-4e88-a326-8ade591c878c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GLContainer.py" afterPath="$PROJECT_DIR$/GLContainer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GLWidget.py" afterPath="$PROJECT_DIR$/GLWidget.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shader.frag" afterPath="$PROJECT_DIR$/shader.frag" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shader.vert" afterPath="$PROJECT_DIR$/shader.vert" />
     </list>
     <ignored path="PyQtOpenGLCanvas.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,44 +38,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GLContainer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GLContainer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GLContainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.509915">
-              <caret line="36" column="33" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
               <folding>
                 <element signature="e#22#32#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QAbstractScrollArea.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/161549755/PyQt4/QtGui/QAbstractScrollArea.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shader.frag" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shader.frag">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shader.vert" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shader.vert">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,14 +60,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GLWidget.py">
+      <file leaf-file-name="shader.frag" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shader.frag">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GLWidget.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5286686">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shader.vert" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shader.vert">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,9 +100,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GLWidget.py" />
         <option value="$PROJECT_DIR$/Demo.py" />
         <option value="$PROJECT_DIR$/GLContainer.py" />
+        <option value="$PROJECT_DIR$/shader.vert" />
+        <option value="$PROJECT_DIR$/shader.frag" />
+        <option value="$PROJECT_DIR$/GLWidget.py" />
       </list>
     </option>
   </component>
@@ -709,6 +703,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/161549755/PyQt4/QtGui/QAbstractScrollArea.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7365439">
+          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Demo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -719,19 +729,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shader.frag">
+    <entry file="file://$PROJECT_DIR$/GLContainer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shader.vert">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+          <folding>
+            <element signature="e#22#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -743,38 +747,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shader.frag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shader.vert">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GLWidget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.5286686">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/161549755/PyQt4/QtGui/QAbstractScrollArea.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="84" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GLContainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.509915">
-          <caret line="36" column="33" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="33" />
-          <folding>
-            <element signature="e#22#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

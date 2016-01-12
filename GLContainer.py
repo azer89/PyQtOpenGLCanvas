@@ -35,10 +35,13 @@ class GLContainer(QAbstractScrollArea):
         self.verticalScrollBar().setVisible(True)
 
         self._glWidget = GLWidget()
-
         self.setViewport(self._glWidget)
 
+
+
         self.setMouseTracking(True)
+
+        self.UpdateViewport(True)
 
         #mainLayout = QtGui.QHBoxLayout()
         #mainLayout.addWidget(self._glWidget)
@@ -47,12 +50,34 @@ class GLContainer(QAbstractScrollArea):
 
         QtCore.QCoreApplication.instance().aboutToQuit.connect( self.DeleteGLWidget )
 
+    def UpdateViewport(self, putInMiddle):
+        leftRange  = -100
+        rightRange = 100
+        upRange    = -100
+        downRange  = 100
+
+        hPos = 0
+        vPos = 0
+
+        #print self._glWidget.__image_width
+        #print self._glWidget.__image_height
+
+        # dummy code
+        self.horizontalScrollBar().setRange(leftRange, rightRange)
+        self.verticalScrollBar().setRange(upRange, downRange)
+
+        self.horizontalScrollBar().setSliderPosition(hPos)
+        self.verticalScrollBar().setSliderPosition(vPos)
+
+
+
+
     def DeleteGLWidget(self):
         print "QUIT"
         self._glWidget.setParent(None)
         del self._glWidget
 
-    def paintEvent(self, QPaintEvent):
+    def paintEvent(self, event):
 
 
         self._glWidget.updateGL()
