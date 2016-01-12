@@ -18,27 +18,45 @@ from PyQt4.QtGui import *
 #from PyQt4.QtGui import QMatrix4x4
 
 from GLWidget import GLWidget
+from GLWidget import QAbstractScrollArea, QPaintEvent
 
-class GLContainer(QWidget):
+class GLContainer(QAbstractScrollArea):
     """
     Class GLContainer
     """
     def __init__(self):
         super(GLContainer, self).__init__()
 
-        self.glWidget = GLWidget()
+        self.horizontalScrollBar().setSingleStep(10)
+        self.horizontalScrollBar().setPageStep(100)
+        self.verticalScrollBar().setSingleStep(10)
+        self.verticalScrollBar().setPageStep(100)
+        self.horizontalScrollBar().setVisible(True)
+        self.verticalScrollBar().setVisible(True)
 
-        mainLayout = QtGui.QHBoxLayout()
+        self._glWidget = GLWidget()
 
-        mainLayout.addWidget(self.glWidget)
-        self.setLayout(mainLayout)
+        self.setViewport(self._glWidget)
 
-        self.setWindowTitle("Hello GL")
+        self.setMouseTracking(True)
+
+        #mainLayout = QtGui.QHBoxLayout()
+        #mainLayout.addWidget(self._glWidget)
+        #self.setLayout(mainLayout)
+        #self.setWindowTitle("Hello GL")
 
         QtCore.QCoreApplication.instance().aboutToQuit.connect( self.DeleteGLWidget )
 
     def DeleteGLWidget(self):
         print "QUIT"
-        self.glWidget.setParent(None)
-        del self.glWidget
+        self._glWidget.setParent(None)
+        del self._glWidget
+
+    def paintEvent(self, QPaintEvent):
+
+
+        self._glWidget.updateGL()
+
+    #def paintEvent(self):
+    #    pass
         
