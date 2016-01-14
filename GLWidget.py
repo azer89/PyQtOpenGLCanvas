@@ -4,7 +4,7 @@ from OpenGL.GL import *
 
 from PyQt4.QtGui import QWidget
 from PyQt4 import QtGui, QtCore
-from PyQt4.QtCore import QSize
+from PyQt4.QtCore import QSize, QPoint
 
 from PyQt4 import QtGui, QtOpenGL
 
@@ -15,10 +15,56 @@ from PyQt4.QtGui import *
 
 
 class GLWidget(QtOpenGL.QGLWidget):
-    def __init__(self, parent = None):
 
-        self.__image_width  = 50
-        self.__image_height = 50
+    """
+    Get / Set
+    """
+
+    def GetImageSize(self):
+        """
+        Get the size of the canvas / image
+        """
+        return QSize(self.__image_width, self.__image_height)
+
+
+    def SetZoomFactor(self, val):
+        """
+        Set the value of magnification
+        """
+        self.__zoomFactor = val
+
+
+    def GetZoomFactor(self):
+        """
+        Obtain the value of the magnification
+        """
+        return self.__zoomFactor
+
+
+    def SetMouseDown(self, val):
+        """
+        Set the value of mouse down
+        """
+        self.__isMouseDown = val
+
+    def SetHorizontalScroll(self, val):
+        self.__scrollOffset.setX(val)
+
+
+    def SetVerticalScroll(self, val):
+        self.__scrollOffset.setY(val)
+
+    def __init__(self, parent = None):
+        """
+        Constructor
+        """
+        self.__image_width  = 500
+        self.__image_height = 500
+
+        self.__isMouseDown = False
+        self.__zoomFactor = 1.0
+
+        self.__scrollOffset = QPoint()
 
         if hasattr(QGLFormat, 'setVersion'):
             # Modern OpenGL
@@ -32,15 +78,10 @@ class GLWidget(QtOpenGL.QGLWidget):
             QGLWidget.__init__(self, parent)
 
 
-    def GetImageSize(self):
-        return QSize(self.__image_width, self.__image_height)
-
-
     def initializeGL(self):
+        glClearColor(1.0, 1.0, 1.0, 1.0)
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_CULL_FACE)
-
-        glViewport(0, 0, self.width(), self.height())
 
         self.__shaderProgram = QGLShaderProgram()
 
@@ -79,8 +120,8 @@ class GLWidget(QtOpenGL.QGLWidget):
                                  dtype = numpy.float32)
 
         # create VAO
-        self.VAO = glGenVertexArrays(1)
-        glBindVertexArray(self.VAO)
+        self.__VAO = glGenVertexArrays(1)
+        glBindVertexArray(self.__VAO)
 
         # create a VBO for position and uv
         posVBO = glGenBuffers(1)
@@ -105,25 +146,43 @@ class GLWidget(QtOpenGL.QGLWidget):
 
 
     def paintGL(self):
-        glClearColor(0, 0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glViewport(0, 0, self.width() , self.height())
 
         orthoMatrix = QMatrix4x4()
-        orthoMatrix.ortho(0.0, self.width() , self.height(), 0, -100, 100)
+        orthoMatrix.ortho(0  +  self.__scrollOffset.x(),
+                          self.width()  +  self.__scrollOffset.x(),
+                          self.height()  +  self.__scrollOffset.y(),
+                          0  +  self.__scrollOffset.y(),
+                          -100, 100)
         transformMatrix = QMatrix4x4()
         transformMatrix.setToIdentity()
-        mpvMatrix = orthoMatrix * transformMatrix
+        transformMatrix.scale(self.__zoomFactor)
 
         # activate shader program
         self.__shaderProgram.bind()
+        # set a shader attribute (0 means use texture, 1 means use color)
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
-        glBindTexture(GL_TEXTURE_2D, self._ori_tex)
-        self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, mpvMatrix)
+        # bind texture
+        glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
+        # feed the mpv matrix
+        self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
 
-        glBindVertexArray(self.VAO)
+        # bind VAO
+        glBindVertexArray(self.__VAO)
 
         # draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 9)
 
+        # unbind
         glBindVertexArray(0)
         glUseProgram(0)
+
+    def ZoomIn(self):
+        self.__zoomFactor += 0.01
+
+
+    def ZoomOut(self):
+        self.__zoomFactor -= 0.01
+        if(self.__zoomFactor < 0.1):
+            self.__zoomFactor = 0.1
