@@ -1,3 +1,8 @@
+
+"""
+radhitya@uwaterloo.ca
+"""
+
 import sys
 import numpy
 from OpenGL.GL import *
