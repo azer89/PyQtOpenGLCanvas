@@ -64,17 +64,18 @@ class GLContainer(QAbstractScrollArea):
 
         self.__justInitialized = True
 
+
     def HScrollChanged(self, val):
-        #print "HScrollChanged ", val
         self.__xPrevF = val
         self.__glWidget.SetHorizontalScroll(val)
         self.__scrollMoved = True
 
+
     def VScrollChanged(self, val):
-        #print "VScrollChanged ", val
         self.__yPrevF = val
         self.__glWidget.SetVerticalScroll(val)
         self.__scrollMoved = True
+
 
     def UpdateViewport(self, putInMiddle = False):
 
@@ -91,8 +92,8 @@ class GLContainer(QAbstractScrollArea):
 
         imgSize = self.__glWidget.GetImageSize()
 
-        img_width = imgSize.width() * zoomFactor
-        img_height = imgSize.height() * zoomFactor
+        img_width = float(imgSize.width() * zoomFactor)
+        img_height = float(imgSize.height() * zoomFactor)
 
         if (img_width == 0 or img_height == 0):
             img_width = 100 * zoomFactor
@@ -102,8 +103,8 @@ class GLContainer(QAbstractScrollArea):
         ySPos = 0
 
         if not putInMiddle:
-            xNormPos = self.__mousePos.x() + self.__xPrevF
-            yNormPos = self.__mousePos.y() + self.__yPrevF
+            xNormPos = float(self.__mousePos.x() + self.__xPrevF)
+            yNormPos = float(self.__mousePos.y() + self.__yPrevF)
             xNormPos /= self.__prevZoomFactor
             yNormPos /= self.__prevZoomFactor
 
@@ -158,27 +159,16 @@ class GLContainer(QAbstractScrollArea):
         self.horizontalScrollBar().setSliderPosition(hPos)
         self.verticalScrollBar().setSliderPosition(vPos)
 
-        print leftRange, " ", rightRange, " ", upRange, " ", downRange, " ", hPos, " ", vPos
-
-        #print self._glWidget.__image_width
-        #print self._glWidget.__image_height
-
-        # dummy code
-        """
-        self.horizontalScrollBar().setRange(leftRange, rightRange)
-        self.verticalScrollBar().setRange(upRange, downRange)
-
-        self.horizontalScrollBar().setSliderPosition(hPos)
-        self.verticalScrollBar().setSliderPosition(vPos)
-        """
+        #print leftRange, " ", rightRange, " ", upRange, " ", downRange, " ", hPos, " ", vPos
 
     def setScrolls(self):
+        """
+        Currently not being used...
+        """
         self.horizontalScrollBar().setVisible(True)
         self.verticalScrollBar().setVisible(True)
 
         self.__prevZoomFactor = 1.0
-
-        #std::cout << "SetScrolls\n";
 
         # nasty code here...
         shouldZoom = True
@@ -205,6 +195,8 @@ class GLContainer(QAbstractScrollArea):
 
     def mouseMoveEvent(self, event):
         super(GLContainer, self).mouseMoveEvent(event)
+        self.__mousePos.setX(event.x())
+        self.__mousePos.setY(event.y())
 
 
     def mouseReleaseEvent(self, event):
@@ -220,9 +212,6 @@ class GLContainer(QAbstractScrollArea):
             self.__glWidget.ZoomOut()
         else :
             self.__glWidget.ZoomIn()
-
-
-        #float zoomFactor = _glWidget->GetZoomFactor() * 100.0;
 
         # update scrollbars
         self.UpdateViewport()
@@ -258,15 +247,11 @@ class GLContainer(QAbstractScrollArea):
         self.__glWidget.setParent(None)
         del self.__glWidget
 
+
     def paintEvent(self, event):
+
         if(self.__justInitialized):
             self.UpdateViewport(True)
             self.__justInitialized = False
 
         self.__glWidget.updateGL()
-
-
-
-    #def paintEvent(self):
-    #    pass
-        
