@@ -37,13 +37,12 @@ class GLContainer(QAbstractScrollArea):
 
         self.horizontalScrollBar().setSingleStep(10)
         self.horizontalScrollBar().setPageStep(100)
+        self.horizontalScrollBar().setVisible(True)
+
         self.verticalScrollBar().setSingleStep(10)
         self.verticalScrollBar().setPageStep(100)
-        self.horizontalScrollBar().setVisible(True)
         self.verticalScrollBar().setVisible(True)
 
-        #self.connect(self.horizontalScrollBar(), SIGNAL(self.horizontalScrollBar().valueChanged(int)), self, SLOT(self.HScrollChanged(int)))
-        #self.connect(self.verticalScrollBar(),   SIGNAL(self.verticalScrollBar().valueChanged(int)), self, SLOT(self.VScrollChanged(int)))
         self.horizontalScrollBar().valueChanged.connect(self.HScrollChanged)
         self.verticalScrollBar().valueChanged.connect(self.VScrollChanged)
 
@@ -51,7 +50,6 @@ class GLContainer(QAbstractScrollArea):
         self.setViewport(self.__glWidget)
 
         self.setMouseTracking(True)
-
         self.UpdateViewport(True)
 
         self.__mousePressed = False
@@ -117,8 +115,8 @@ class GLContainer(QAbstractScrollArea):
         xGap = np.abs(barSize.width() - img_width)
         yGap = np.abs(barSize.height() - img_height)
 
-        if (img_width <= barSize.width()):
-            if putInMiddle:
+        if(img_width <= barSize.width()):
+            if(putInMiddle):
                 hPos = -xGap * 0.5
             else:
                 hPos  = xSPos
@@ -126,7 +124,7 @@ class GLContainer(QAbstractScrollArea):
             leftRange  = -img_width - xGap
             rightRange = img_width
         else:
-            if putInMiddle:
+            if(putInMiddle):
                 hPos = xGap * 0.5
             else:
                 hPos  = xSPos
@@ -134,8 +132,8 @@ class GLContainer(QAbstractScrollArea):
             leftRange  = -img_width + xGap
             rightRange = img_width
 
-        if (img_height <= barSize.height()):
-            if putInMiddle:
+        if(img_height <= barSize.height()):
+            if(putInMiddle):
                 vPos = -yGap * 0.5
             else:
                 vPos = ySPos
@@ -143,7 +141,7 @@ class GLContainer(QAbstractScrollArea):
             upRange   = -img_height -yGap
             downRange = img_height
         else:
-            if putInMiddle:
+            if(putInMiddle):
                 vPos = yGap * 0.5
             else:
                 vPos = ySPos
@@ -173,6 +171,33 @@ class GLContainer(QAbstractScrollArea):
         self.horizontalScrollBar().setSliderPosition(hPos)
         self.verticalScrollBar().setSliderPosition(vPos)
         """
+
+    def setScrolls(self):
+        self.horizontalScrollBar().setVisible(True)
+        self.verticalScrollBar().setVisible(True)
+
+        self.__prevZoomFactor = 1.0
+
+        #std::cout << "SetScrolls\n";
+
+        # nasty code here...
+        shouldZoom = True
+        while(shouldZoom):
+            w = self.width()
+            h = self.height()
+            imgSize = self.__glWidget.GetImageSize()
+            if(imgSize.width() == 0 or imgSize.height() == 0):
+                imgSize = QSize(100, 100)
+
+            zoomFactor = self.__glWidget.GetZoomFactor()
+
+            if( w < imgSize.width() * zoomFactor or h < imgSize.height() *zoomFactor):
+                self.__glWidget.ZoomOut()
+            else:
+                shouldZoom = False
+
+        self.UpdateViewport(True)
+
 
     def mousePressEvent(self, event):
         super(GLContainer, self).mousePressEvent(event)

@@ -155,10 +155,10 @@ class GLWidget(QtOpenGL.QGLWidget):
         glViewport(0, 0, self.width() , self.height())
 
         orthoMatrix = QMatrix4x4()
-        orthoMatrix.ortho(0  +  self.__scrollOffset.x(),
+        orthoMatrix.ortho(0             +  self.__scrollOffset.x(),
                           self.width()  +  self.__scrollOffset.x(),
-                          self.height()  +  self.__scrollOffset.y(),
-                          0  +  self.__scrollOffset.y(),
+                          self.height() +  self.__scrollOffset.y(),
+                          0             +  self.__scrollOffset.y(),
                           -100, 100)
         transformMatrix = QMatrix4x4()
         transformMatrix.setToIdentity()
