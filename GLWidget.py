@@ -63,8 +63,8 @@ class GLWidget(QtOpenGL.QGLWidget):
         """
         Constructor
         """
-        self.__image_width  = 500
-        self.__image_height = 500
+        self.__image_width  = 250
+        self.__image_height = 250
 
         self.__isMouseDown = False
         self.__zoomFactor = 1.0
@@ -109,9 +109,9 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
                                 # position
-        vertexData = numpy.array([250.0,  20.0, 0.0, 1.0,
-                                  100.0, 300.0, 0.0, 1.0,
-                                  560.0, 400.0, 0.0, 1.0,
+        vertexData = numpy.array([250.0,  0.0, 0.0, 1.0,
+                                    0.0, 250.0, 0.0, 1.0,
+                                  250.0, 250.0, 0.0, 1.0,
 
                                 # uv
                                 0.0, 1.0,
@@ -154,11 +154,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glViewport(0, 0, self.width() , self.height())
 
+        #print self.__scrollOffset.x(), " ", self.__scrollOffset.y()
+
         orthoMatrix = QMatrix4x4()
-        orthoMatrix.ortho(0             +  self.__scrollOffset.x(),
-                          self.width()  +  self.__scrollOffset.x(),
+        orthoMatrix.ortho(0 +  self.__scrollOffset.x(),
+                          self.width() +  self.__scrollOffset.x(),
                           self.height() +  self.__scrollOffset.y(),
-                          0             +  self.__scrollOffset.y(),
+                          0 +  self.__scrollOffset.y(),
                           -100, 100)
         transformMatrix = QMatrix4x4()
         transformMatrix.setToIdentity()
@@ -167,7 +169,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         # activate shader program
         self.__shaderProgram.bind()
         # set a shader attribute (0 means use texture, 1 means use color)
-        self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
+        self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
         # bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
         # feed the mpv matrix

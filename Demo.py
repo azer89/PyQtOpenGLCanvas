@@ -6,6 +6,13 @@ http://stackoverflow.com/questions/11192938/compiling-shaders-in-pyqt
 
 """
 
+"""
+Demo
+
+
+radhitya@uwaterloo.ca
+"""
+
 import sys
 
 from PyQt4 import QtCore, QtGui
