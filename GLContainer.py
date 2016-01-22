@@ -55,8 +55,8 @@ class GLContainer(QAbstractScrollArea):
         self.__mousePressed = False
         self.__ctrlPressed = False
         self.__scrollMoved = False
-        self.__xPrevF = 0
-        self.__yPrevF = 0
+        self.__xPrevF = 0.0
+        self.__yPrevF = 0.0
         self.__prevZoomFactor = self.__glWidget.GetZoomFactor()
         self.__mousePos = QPointF(0, 0)
 
@@ -68,18 +68,20 @@ class GLContainer(QAbstractScrollArea):
 
 
     def HScrollChanged(self, val):
-        self.__xPrevF = val
+        self.__xPrevF = float(val)
         self.__glWidget.SetHorizontalScroll(val)
         self.__scrollMoved = True
 
 
     def VScrollChanged(self, val):
-        self.__yPrevF = val
+        self.__yPrevF = float(val)
         self.__glWidget.SetVerticalScroll(val)
         self.__scrollMoved = True
 
 
     def UpdateViewport(self, putInMiddle = False):
+
+        """
         leftRange  = 0
         rightRange = 0
         upRange    = 0
@@ -87,6 +89,7 @@ class GLContainer(QAbstractScrollArea):
 
         hPos = 0
         vPos = 0
+        """
 
         barSize = QSize(self.width() - 20, self.height() - 20)
         zoomFactor = self.__glWidget.GetZoomFactor()
@@ -99,12 +102,14 @@ class GLContainer(QAbstractScrollArea):
         img_height = float(imgSize.height() * zoomFactor)
 
         if (img_width == 0 or img_height == 0):
+            print "duh"
             img_width = 100 * zoomFactor
             img_height  = 100 * zoomFactor
 
         xSPos = 0
         ySPos = 0
 
+        #print img_width, " ", img_height
         #print self.__mousePos.x(), " ", self.__mousePos.y()
 
         if not putInMiddle:
@@ -113,8 +118,8 @@ class GLContainer(QAbstractScrollArea):
             xNormPos /= self.__prevZoomFactor
             yNormPos /= self.__prevZoomFactor
 
-            xRev = xNormPos * zoomFactor
-            yRev = yNormPos * zoomFactor
+            xRev = float(xNormPos) * zoomFactor
+            yRev = float(yNormPos) * zoomFactor
             xSPos = xRev - float(self.__mousePos.x())
             ySPos = yRev - float(self.__mousePos.y())
 
@@ -122,8 +127,9 @@ class GLContainer(QAbstractScrollArea):
         yGap = np.abs(barSize.height() - img_height)
 
         #print xGap, " ", yGap
-        #print xSPos, " ", ySPos
-        print "__xPrevF ", self.__xPrevF, "__yPrevF ", self.__yPrevF
+        print xSPos, " ", ySPos
+        #print "__xPrevF ", self.__xPrevF, "__yPrevF ", self.__yPrevF
+        #print "__yPrevF ", self.__yPrevF
 
         if(img_width <= barSize.width()) :
             if(putInMiddle):
@@ -148,7 +154,7 @@ class GLContainer(QAbstractScrollArea):
             else:
                 vPos = ySPos
 
-            upRange   = -img_height -yGap
+            upRange   = -img_height - yGap
             downRange = img_height
         else :
             if(putInMiddle):
@@ -171,6 +177,7 @@ class GLContainer(QAbstractScrollArea):
         self.horizontalScrollBar().setSliderPosition(hPos)
         self.verticalScrollBar().setSliderPosition(vPos)
 
+        #print vPos
         #print leftRange, " ", rightRange, " ", upRange, " ", downRange, " ", hPos, " ", vPos
 
     def setScrolls(self):
@@ -203,6 +210,7 @@ class GLContainer(QAbstractScrollArea):
 
     def mousePressEvent(self, event):
         super(GLContainer, self).mousePressEvent(event)
+        #pass
 
 
     def mouseMoveEvent(self, event):
@@ -214,11 +222,12 @@ class GLContainer(QAbstractScrollArea):
 
 
     def mouseReleaseEvent(self, event):
+        #pass
         super(GLContainer, self).mouseReleaseEvent(event)
 
 
     def wheelEvent(self, event):
-        super(GLContainer, self).wheelEvent(event)
+        #super(GLContainer, self).wheelEvent(event) # don't uncomment !!!
         scrollDir = True if (event.delta() > 0) else False
         self.__prevZoomFactor = self.__glWidget.GetZoomFactor()
 
@@ -228,12 +237,12 @@ class GLContainer(QAbstractScrollArea):
             self.__glWidget.ZoomIn()
 
         # update scrollbars
-        self.UpdateViewport(True)
+        self.UpdateViewport()
 
 
 
     def keyPressEvent(self, event):
-        super(GLContainer, self).keyPressEvent(event)
+        #super(GLContainer, self).keyPressEvent(event)
 
         if (event.key() == Qt.Key_Control):
             #print "CRTL pressed"
@@ -249,7 +258,7 @@ class GLContainer(QAbstractScrollArea):
 
 
     def keyReleaseEvent(self, event):
-        super(GLContainer, self).keyReleaseEvent(event)
+        #super(GLContainer, self).keyReleaseEvent(event)
         if (event.key() == Qt.Key_Control):
             #print "CRTL released"
             self.__ctrlPressed = False

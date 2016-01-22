@@ -32,7 +32,7 @@ if __name__ == '__main__':
     app.references = set()
 
     window = GLContainer()
-    window.resize(640, 480)
+    window.resize(1024, 768)
     app.references.add(window)
     window.show()
 

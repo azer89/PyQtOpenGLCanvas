@@ -166,6 +166,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glViewport(0, 0, self.width() , self.height())
 
+        #print "width: ", self.width(), " height: ", self.height()
         #print self.__scrollOffset.x(), " ", self.__scrollOffset.y()
 
         orthoMatrix = QMatrix4x4()
@@ -181,7 +182,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         # activate shader program
         self.__shaderProgram.bind()
         # set a shader attribute (0 means use texture, 1 means use color)
-        self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
+        self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
         # bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
         # feed the mpv matrix
