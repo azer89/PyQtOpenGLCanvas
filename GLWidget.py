@@ -84,7 +84,7 @@ class GLWidget(QtOpenGL.QGLWidget):
 
 
     def initializeGL(self):
-        glClearColor(1.0, 1.0, 1.0, 1.0)
+        glClearColor(0.5, 0.5, 0.5, 1.0)
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_CULL_FACE)
 
@@ -108,20 +108,32 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
-                                # position
-        vertexData = numpy.array([250.0,  0.0, 0.0, 1.0,
-                                    0.0, 250.0, 0.0, 1.0,
-                                  250.0, 250.0, 0.0, 1.0,
+        vertexData = numpy.array([   0.0,   0.0, 0.0, 1.0,
+                                     0.0, 250.0, 0.0, 1.0,
+                                   250.0, 250.0, 0.0, 1.0,
+
+                                     0.0,   0.0, 0.0, 1.0,
+                                   250.0, 250.0, 0.0, 1.0,
+                                   250.0,   0.0, 0.0, 1.0,
 
                                 # uv
-                                0.0, 1.0,
-                                0.0, 0.0,
-                                1.0, 0.0],
+                                0, 1,
+                                0, 0,
+                                1, 0,
+
+                                0, 1,
+                                1, 0,
+                                1, 1,
+                                ],
                                 dtype = numpy.float32)
 
         colorData = numpy.array([1.0, 0.0, 0.0, 1.0,
                                  0.0, 0.0, 1.0, 1.0,
-                                 0.0, 1.0, 0.0, 1.0],
+                                 0.0, 1.0, 0.0, 1.0,
+                                 1.0, 0.0, 0.0, 1.0,
+                                 0.0, 1.0, 0.0, 1.0,
+                                 0.0, 0.0, 1.0, 1.0,
+                                 ],
                                  dtype = numpy.float32)
 
         # create VAO
@@ -136,7 +148,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         glVertexAttribPointer(self.__vertexLocation, 4, GL_FLOAT, GL_FALSE, 0, None)
 
         glEnableVertexAttribArray(self.__texCoordLocation)
-        glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(48))
+        glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(96))
 
         # create VBO for color
         colVBO = glGenBuffers(1)
@@ -179,17 +191,17 @@ class GLWidget(QtOpenGL.QGLWidget):
         glBindVertexArray(self.__VAO)
 
         # draw triangle
-        glDrawArrays(GL_TRIANGLES, 0, 9)
+        glDrawArrays(GL_TRIANGLES, 0, 18)
 
         # unbind
         glBindVertexArray(0)
         glUseProgram(0)
 
     def ZoomIn(self):
-        self.__zoomFactor += 0.01
+        self.__zoomFactor += 0.1
 
 
     def ZoomOut(self):
-        self.__zoomFactor -= 0.01
+        self.__zoomFactor -= 0.1
         if(self.__zoomFactor < 0.1):
             self.__zoomFactor = 0.1

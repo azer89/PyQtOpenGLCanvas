@@ -58,7 +58,7 @@ class GLContainer(QAbstractScrollArea):
         self.__xPrevF = 0
         self.__yPrevF = 0
         self.__prevZoomFactor = self.__glWidget.GetZoomFactor()
-        self.__mousePos = QPoint(0, 0)
+        self.__mousePos = QPointF(0, 0)
 
         QtCore.QCoreApplication.instance().aboutToQuit.connect( self.DeleteGLWidget )
 
@@ -121,6 +121,10 @@ class GLContainer(QAbstractScrollArea):
         xGap = np.abs(barSize.width() - img_width)
         yGap = np.abs(barSize.height() - img_height)
 
+        #print xGap, " ", yGap
+        #print xSPos, " ", ySPos
+        print "__xPrevF ", self.__xPrevF, "__yPrevF ", self.__yPrevF
+
         if(img_width <= barSize.width()) :
             if(putInMiddle):
                 hPos = -xGap * 0.5
@@ -159,7 +163,7 @@ class GLContainer(QAbstractScrollArea):
         self.__xPrevF = hPos
         self.__yPrevF = vPos
 
-        #print hPos, " ", vPos
+        #print "hPos ", hPos, "vPos ", vPos
 
         self.horizontalScrollBar().setRange(leftRange, rightRange)
         self.verticalScrollBar().setRange(upRange, downRange)
@@ -203,8 +207,8 @@ class GLContainer(QAbstractScrollArea):
 
     def mouseMoveEvent(self, event):
         super(GLContainer, self).mouseMoveEvent(event)
-        self.__mousePos.setX(event.x())
-        self.__mousePos.setY(event.y())
+        self.__mousePos.setX( event.x() )
+        self.__mousePos.setY( event.y() )
 
         #print "mouse move ", self.__mousePos.x(), " ", self.__mousePos.y()
 
