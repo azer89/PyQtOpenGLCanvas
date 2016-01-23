@@ -96,8 +96,6 @@ class GLContainer(QAbstractScrollArea):
 
         imgSize = self.__glWidget.GetImageSize()
 
-        #print imgSize, " ", zoomFactor
-
         img_width = float(imgSize.width() * zoomFactor)
         img_height = float(imgSize.height() * zoomFactor)
 
@@ -108,9 +106,6 @@ class GLContainer(QAbstractScrollArea):
 
         xSPos = 0
         ySPos = 0
-
-        #print img_width, " ", img_height
-        #print self.__mousePos.x(), " ", self.__mousePos.y()
 
         if not putInMiddle:
             xNormPos = float(self.__mousePos.x()) + self.__xPrevF
@@ -125,11 +120,6 @@ class GLContainer(QAbstractScrollArea):
 
         xGap = np.abs(barSize.width() - img_width)
         yGap = np.abs(barSize.height() - img_height)
-
-        #print xGap, " ", yGap
-        print xSPos, " ", ySPos
-        #print "__xPrevF ", self.__xPrevF, "__yPrevF ", self.__yPrevF
-        #print "__yPrevF ", self.__yPrevF
 
         if(img_width <= barSize.width()) :
             if(putInMiddle):
@@ -169,16 +159,11 @@ class GLContainer(QAbstractScrollArea):
         self.__xPrevF = hPos
         self.__yPrevF = vPos
 
-        #print "hPos ", hPos, "vPos ", vPos
-
         self.horizontalScrollBar().setRange(leftRange, rightRange)
         self.verticalScrollBar().setRange(upRange, downRange)
 
         self.horizontalScrollBar().setSliderPosition(hPos)
         self.verticalScrollBar().setSliderPosition(vPos)
-
-        #print vPos
-        #print leftRange, " ", rightRange, " ", upRange, " ", downRange, " ", hPos, " ", vPos
 
     def setScrolls(self):
         """
@@ -218,7 +203,6 @@ class GLContainer(QAbstractScrollArea):
         self.__mousePos.setX( event.x() )
         self.__mousePos.setY( event.y() )
 
-        #print "mouse move ", self.__mousePos.x(), " ", self.__mousePos.y()
 
 
     def mouseReleaseEvent(self, event):
@@ -242,7 +226,7 @@ class GLContainer(QAbstractScrollArea):
 
 
     def keyPressEvent(self, event):
-        #super(GLContainer, self).keyPressEvent(event)
+        super(GLContainer, self).keyPressEvent(event)
 
         if (event.key() == Qt.Key_Control):
             #print "CRTL pressed"
@@ -258,7 +242,8 @@ class GLContainer(QAbstractScrollArea):
 
 
     def keyReleaseEvent(self, event):
-        #super(GLContainer, self).keyReleaseEvent(event)
+        super(GLContainer, self).keyReleaseEvent(event)
+
         if (event.key() == Qt.Key_Control):
             #print "CRTL released"
             self.__ctrlPressed = False
