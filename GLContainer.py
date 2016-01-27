@@ -28,6 +28,7 @@ from numpy.core.fromnumeric import put
 from GLWidget import GLWidget
 from GLWidget import QAbstractScrollArea, QPaintEvent
 
+
 class GLContainer(QAbstractScrollArea):
     """
     Class GLContainer
