@@ -20,8 +20,9 @@ from PyQt4.QtGui import *
 #from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
 #from PyQt4.QtGui import QMatrix4x4
 
-#from MySvgTool import MySvgTool
+
 from MySvgTool import MySvgTool
+from MySvgWriter import MySvgWriter
 
 # didn't work !!!
 #import glsvg
@@ -109,9 +110,10 @@ class GLWidget(QtOpenGL.QGLWidget):
 
 
         #self.__svgItem = QtSvg.QGraphicsSvgItem("circle_star.svg")
-        #self.__svgTool = SvgTool()
+        self.__mySvgTool = MySvgTool()
 
-
+        self.__mySvgWriter = MySvgWriter()
+        self.__mySvgWriter.DrawSomething();
 
     def initializeGL(self):
 
