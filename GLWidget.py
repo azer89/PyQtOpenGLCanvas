@@ -95,7 +95,10 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
-        ###"""
+        self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
+        self.__myBufferPainter.initializeGL()
+
+        """
         # texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
 
@@ -151,7 +154,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         # unbind vao and vbo
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
-        ###"""
+        """
 
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -175,7 +178,9 @@ class GLWidget(QtOpenGL.QGLWidget):
         # feed the mpv matrix
         self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
 
-        ###"""
+
+        self.__myBufferPainter.paintGL()
+        """
         # DRAW SOMETHING
         # bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
@@ -183,7 +188,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         glBindVertexArray(self.__VAO)
         # draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
-        ###"""
+        """
 
         # unbind
         glBindVertexArray(0)

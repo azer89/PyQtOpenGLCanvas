@@ -10,24 +10,29 @@ import numpy
 from OpenGL.GL import *
 from PyQt4 import QtOpenGL
 from PyQt4.QtOpenGL import *
+from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
-class MyBufferPainter(object):
+class MyBufferPainter(QtOpenGL.QGLWidget):
 
-    def __init__(self):
+    def __init__(self, parent = None):
+        QGLWidget.__init__(self, parent)
         print "MyBufferPainter"
+
+    def SetThings(self, shaderProgram, texCoordLocation, vertexLocation, colorLocation, use_color_location, mvpMatrixLocation):
+        self.__shaderProgram = shaderProgram
+
+        self.__texCoordLocation   = texCoordLocation
+        self.__vertexLocation     = vertexLocation
+        self.__colorLocation      = colorLocation
+        self.__use_color_location = use_color_location
+        self.__mvpMatrixLocation  = mvpMatrixLocation
+
+
 
     def initializeGL(self):
         # texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
-
-        self.__shaderProgram.link()
-
-        self.__texCoordLocation   = self.__shaderProgram.attributeLocation("uv")
-        self.__vertexLocation     = self.__shaderProgram.attributeLocation("position")
-        self.__colorLocation      = self.__shaderProgram.attributeLocation("color")
-        self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
-        self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
         vertexData = numpy.array([   0.0,   0.0, 0.0, 1.0,
                                      0.0, 250.0, 0.0, 1.0,
@@ -82,4 +87,10 @@ class MyBufferPainter(object):
         #pass
 
     def paintGL(self):
-        pass
+        # DRAW SOMETHING
+        # bind texture
+        glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
+        # bind VAO
+        glBindVertexArray(self.__VAO)
+        # draw triangle
+        glDrawArrays(GL_TRIANGLES, 0, 18)
