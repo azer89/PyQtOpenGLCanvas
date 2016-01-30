@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a10b2903-b1ef-4e88-a326-8ade591c878c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GLWidget.py" afterPath="$PROJECT_DIR$/GLWidget.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyBufferPainter.py" afterPath="$PROJECT_DIR$/MyBufferPainter.py" />
     </list>
     <ignored path="PyQtOpenGLCanvas.iws" />
@@ -44,8 +42,8 @@
           <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.15139443">
-                  <caret line="56" column="52" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
+                <state vertical-scroll-proportion="0.7191235">
+                  <caret line="89" column="10" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
                   <folding>
                     <element signature="e#117#129#0" expanded="true" />
                   </folding>
@@ -92,8 +90,8 @@
         <option value="$PROJECT_DIR$/SVGWriter.py" />
         <option value="$PROJECT_DIR$/MySvgTool.py" />
         <option value="$PROJECT_DIR$/MySvgWriter.py" />
-        <option value="$PROJECT_DIR$/MyBufferPainter.py" />
         <option value="$PROJECT_DIR$/GLWidget.py" />
+        <option value="$PROJECT_DIR$/MyBufferPainter.py" />
       </list>
     </option>
   </component>
@@ -777,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15139443">
-          <caret line="56" column="52" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.7191235">
+          <caret line="89" column="10" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
           <folding>
             <element signature="e#117#129#0" expanded="true" />
           </folding>

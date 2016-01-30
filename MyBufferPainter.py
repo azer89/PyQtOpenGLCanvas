@@ -30,6 +30,7 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
 
 
 
+    # INITIALIZE BUFFER !!!
     def initializeGL(self):
         # texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
@@ -86,6 +87,7 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         glBindVertexArray(0)
         #pass
 
+    # DRAW BUFFER !!!
     def paintGL(self):
         # DRAW SOMETHING
         # bind texture
