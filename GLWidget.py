@@ -98,6 +98,8 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
         self.__myBufferPainter.initializeGL()
 
+        self.__myBufferPainter.paintFullScreen(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
+
         """
         # texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
@@ -173,13 +175,15 @@ class GLWidget(QtOpenGL.QGLWidget):
         # activate shader program
         self.__shaderProgram.bind()
         # set a shader attribute (0 means use texture, 1 means use color)
-        self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
+        #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
 
         # feed the mpv matrix
         self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
 
 
-        self.__myBufferPainter.paintGL()
+        #self.__myBufferPainter.paintGL()
+
+
         """
         # DRAW SOMETHING
         # bind texture
@@ -190,9 +194,13 @@ class GLWidget(QtOpenGL.QGLWidget):
         glDrawArrays(GL_TRIANGLES, 0, 18)
         """
 
+
+
         # unbind
         glBindVertexArray(0)
         glUseProgram(0)
+
+
 
 
     def ZoomIn(self):

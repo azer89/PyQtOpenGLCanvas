@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a10b2903-b1ef-4e88-a326-8ade591c878c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GLWidget.py" afterPath="$PROJECT_DIR$/GLWidget.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyBufferPainter.py" afterPath="$PROJECT_DIR$/MyBufferPainter.py" />
     </list>
     <ignored path="PyQtOpenGLCanvas.iws" />
@@ -22,56 +24,34 @@
     <favorites_list name="PyQtOpenGLCanvas" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50840706">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/GLWidget.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#32#42#0" expanded="true" />
-                    <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-                    <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7191235">
-                  <caret line="89" column="10" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
-                  <folding>
-                    <element signature="e#117#129#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/GLWidget.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.627451">
-                  <caret line="178" column="35" selection-start-line="178" selection-start-column="35" selection-end-line="178" selection-end-column="35" />
-                  <folding>
-                    <element signature="e#32#42#0" expanded="true" />
-                    <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-                    <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GLWidget.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.61263734">
+              <caret line="119" column="35" selection-start-line="119" selection-start-column="35" selection-end-line="119" selection-end-column="35" />
+              <folding>
+                <element signature="e#32#42#0" expanded="true" />
+                <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+                <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.142858">
+              <caret line="167" column="46" selection-start-line="167" selection-start-column="46" selection-end-line="167" selection-end-column="46" />
+              <folding>
+                <element signature="e#118#130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,10 +76,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1969" />
-    <option name="y" value="24" />
-    <option name="width" value="2511" />
-    <option name="height" value="1416" />
+    <option name="x" value="48" />
+    <option name="y" value="-4" />
+    <option name="width" value="1873" />
+    <option name="height" value="1085" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -126,7 +106,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -165,7 +145,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,15 +317,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1969" y="24" width="2511" height="1416" extended-state="6" />
+    <frame x="48" y="-4" width="1873" height="1085" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09996018" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09994655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23197027" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23147207" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -397,8 +377,8 @@
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-            <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -454,8 +434,8 @@
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-            <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -511,8 +491,8 @@
           <caret line="9" column="78" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="78" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-            <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -568,8 +548,8 @@
           <caret line="9" column="78" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="78" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-            <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -625,8 +605,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-            <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -699,21 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/OpenGL/platform/baseplatform.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="401" column="0" selection-start-line="401" selection-start-column="0" selection-end-line="401" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/OpenGL/error.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Demo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -761,24 +726,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GLWidget.py">
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/OpenGL/platform/baseplatform.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454182238990" expanded="true" signature="1008:6880" placeholder="..." />
-            <marker date="1454182238990" expanded="true" signature="1970:5377" placeholder="..." />
-          </folding>
+          <caret line="401" column="0" selection-start-line="401" selection-start-column="0" selection-end-line="401" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda/lib/python2.7/site-packages/OpenGL/error.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7191235">
-          <caret line="89" column="10" selection-start-line="89" selection-start-column="10" selection-end-line="89" selection-end-column="10" />
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="167" column="46" selection-start-line="167" selection-start-column="46" selection-end-line="167" selection-end-column="46" />
           <folding>
-            <element signature="e#117#129#0" expanded="true" />
+            <element signature="e#118#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GLWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61263734">
+          <caret line="119" column="35" selection-start-line="119" selection-start-column="35" selection-end-line="119" selection-end-column="35" />
+          <folding>
+            <element signature="e#32#42#0" expanded="true" />
+            <marker date="1454338375399" expanded="true" signature="1008:7035" placeholder="..." />
+            <marker date="1454338375399" expanded="true" signature="1970:5524" placeholder="..." />
           </folding>
         </state>
       </provider>
