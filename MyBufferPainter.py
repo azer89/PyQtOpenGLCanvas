@@ -32,12 +32,12 @@ class MyBufferPainter(object):
         self.__use_color_location = use_color_location
         self.__mvpMatrixLocation  = mvpMatrixLocation
 
-    # INITIALIZE BUFFER !!!
+    ### INITIALIZE BUFFER !!!
     def initializeGL(self, ori_tex):
-        # texture
+        ### texture
         self.__ori_tex = ori_tex
 
-        """
+
         vertexData = numpy.array([-10.0, -10.0, 0.0, 1.0,  # top left
                                   -20.0, 250.0, 0.0, 1.0,  # bottom left
                                   290.0, 290.0, 0.0, 1.0,  # bottom right
@@ -65,14 +65,11 @@ class MyBufferPainter(object):
                                  0.0, 0.0, 1.0, 1.0,],
                                  dtype = numpy.float32)
 
-        # create VAO
+        ### create VAO
         self.__VAO = glGenVertexArrays(1)
         glBindVertexArray(self.__VAO)
-        """
 
-
-        """
-        # create a VBO for position and uv
+        ### create a VBO for position and uv
         posVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, posVBO)
         glBufferData(GL_ARRAY_BUFFER, vertexData.nbytes, vertexData, GL_STATIC_DRAW)
@@ -82,18 +79,16 @@ class MyBufferPainter(object):
         glEnableVertexAttribArray(self.__texCoordLocation)
         glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(96))
 
-        # create VBO for color
+        ### create VBO for color
         colVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, colVBO)
         glBufferData(GL_ARRAY_BUFFER, colorData.nbytes, colorData, GL_STATIC_DRAW)
         glEnableVertexAttribArray(self.__colorLocation)
         glVertexAttribPointer(self.__colorLocation,    4, GL_FLOAT, GL_FALSE, 0, None)
-        """
 
-        # unbind vao and vbo
-        #glBindBuffer(GL_ARRAY_BUFFER, 0)
-        #glBindVertexArray(0)
-        #pass
+        ### unbind vao and vbo
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        glBindVertexArray(0)
 
     def prepareFrameRect(self, x_offset, y_offset, frame_width, frame_height, zoom_factor):
         """
@@ -136,11 +131,11 @@ class MyBufferPainter(object):
                                  0.0, 0.0, 1.0, 1.0,],
                                  dtype = numpy.float32)
 
-        # create VAO
+        ### create VAO
         self.__bufferVAO = glGenVertexArrays(1)
         glBindVertexArray(self.__bufferVAO)
 
-        # create a VBO for position and uv
+        ### create a VBO for position and uv
         posVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, posVBO)
         glBufferData(GL_ARRAY_BUFFER, vertexData.nbytes, vertexData, GL_STATIC_DRAW)
@@ -150,14 +145,14 @@ class MyBufferPainter(object):
         glEnableVertexAttribArray(self.__texCoordLocation)
         glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(96))
 
-         # create VBO for color
+        ### create VBO for color
         colVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, colVBO)
         glBufferData(GL_ARRAY_BUFFER, colorData.nbytes, colorData, GL_STATIC_DRAW)
         glEnableVertexAttribArray(self.__colorLocation)
         glVertexAttribPointer(self.__colorLocation,    4, GL_FLOAT, GL_FALSE, 0, None)
 
-        # unbind vao and vbo
+        ### unbind vao and vbo
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
         """
@@ -186,16 +181,16 @@ class MyBufferPainter(object):
 
 
 
-    # DRAW BUFFER !!!
+    ### DRAW BUFFER !!!
     def paintGL(self):
         """
-        # DRAW SOMETHING
+        ### DRAW SOMETHING
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
-        # bind texture
+        ### bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
-        # bind VAO
+        ### bind VAO
         glBindVertexArray(self.__VAO)
-        # draw triangle
+        ### draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
         """
 

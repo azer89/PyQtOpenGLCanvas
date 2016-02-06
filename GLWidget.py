@@ -24,19 +24,19 @@ from MySvgTool import MySvgTool
 from MySvgWriter import MySvgWriter
 from MyBufferPainter import MyBufferPainter
 
-# didn't work !!!
+### didn't work !!!
 #import glsvg
 
-# this:
+### this:
 # http://ftp.ics.uci.edu/pub/centos0/ics-custom-build/BUILD/PyQt-x11-gpl-4.7.2/examples/painting/svgviewer/svgviewer.py
 
-# ???
+### ???
 # http://stackoverflow.com/questions/8016050/pyqt-with-interactive-svg-images
 
-# render svg using frame buffer
+### render svg using frame buffer
 # https://github.com/RSATom/Qt/tree/master/qtsvg/examples/svg/opengl
 
-# parse with something and render using qt
+### parse with something and render using qt
 # http://stackoverflow.com/questions/1359003/svg-example-in-c-c
 
 class GLWidget(QtOpenGL.QGLWidget):
@@ -94,8 +94,8 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
-        #self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
-        #self.__myBufferPainter.initializeGL(self.bindTexture(QtGui.QPixmap("laughing_man.png")))
+        self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
+        self.__myBufferPainter.initializeGL(self.bindTexture(QtGui.QPixmap("laughing_man.png")))
         #self.__myBufferPainter.paintFullScreen(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
 
         ### this is okay....
@@ -104,7 +104,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         #frameBufferA.release()
 
 
-        # texture
+        ### texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
 
         vertexData = numpy.array([   0.0,   0.0, 0.0, 1.0,
@@ -133,11 +133,11 @@ class GLWidget(QtOpenGL.QGLWidget):
                                  0.0, 0.0, 1.0, 1.0,],
                                  dtype = numpy.float32)
 
-        # create VAO
+        ### create VAO
         self.__VAO = glGenVertexArrays(1)
         glBindVertexArray(self.__VAO)
 
-        # create a VBO for position and uv
+        ### create a VBO for position and uv
         posVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, posVBO)
         glBufferData(GL_ARRAY_BUFFER, vertexData.nbytes, vertexData, GL_STATIC_DRAW)
@@ -147,14 +147,14 @@ class GLWidget(QtOpenGL.QGLWidget):
         glEnableVertexAttribArray(self.__texCoordLocation)
         glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(96))
 
-        # create VBO for color
+        ### create VBO for color
         colVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, colVBO)
         glBufferData(GL_ARRAY_BUFFER, colorData.nbytes, colorData, GL_STATIC_DRAW)
         glEnableVertexAttribArray(self.__colorLocation)
         glVertexAttribPointer(self.__colorLocation,    4, GL_FLOAT, GL_FALSE, 0, None)
 
-        # unbind vao and vbo
+        ### unbind vao and vbo
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
 
@@ -173,24 +173,24 @@ class GLWidget(QtOpenGL.QGLWidget):
         transformMatrix.setToIdentity()
         transformMatrix.scale(self.__zoomFactor)
 
-        # activate shader program
+        ### activate shader program
         self.__shaderProgram.bind()
-        # set a shader attribute (0 means use texture, 1 means use color)
+        ### set a shader attribute (0 means use texture, 1 means use color)
         #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
 
-        # feed the mpv matrix
+        ### feed the mpv matrix
         self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
         #self.__myBufferPainter.paintGL()
 
-        # DRAW SOMETHING
-        # bind texture
+        ### DRAW SOMETHING
+        ### bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
-        # bind VAO
+        ### bind VAO
         glBindVertexArray(self.__VAO)
-        # draw triangle
+        ### draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
 
-        # unbind
+        ### unbind
         glBindVertexArray(0)
         glUseProgram(0)
 
