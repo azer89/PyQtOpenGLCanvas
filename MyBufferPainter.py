@@ -16,10 +16,11 @@ from PyQt4.QtGui import *
 
 from PyQt4.QtOpenGL import QGLFramebufferObject
 
-class MyBufferPainter(QtOpenGL.QGLWidget):
+class MyBufferPainter(object):
 
-    def __init__(self, parent = None):
-        QGLWidget.__init__(self, parent)
+    #def __init__(self, parent = None):
+    def __init__(self):
+        #QGLWidget.__init__(self, parent)
         print "MyBufferPainter"
 
     def SetThings(self, shaderProgram, texCoordLocation, vertexLocation, colorLocation, use_color_location, mvpMatrixLocation):
@@ -31,22 +32,19 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         self.__use_color_location = use_color_location
         self.__mvpMatrixLocation  = mvpMatrixLocation
 
-
-
-
-
     # INITIALIZE BUFFER !!!
-    def initializeGL(self):
+    def initializeGL(self, ori_tex):
         # texture
-        self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
+        self.__ori_tex = ori_tex
 
-        vertexData = numpy.array([   -10.0,   -10.0, 0.0, 1.0,  # top left
-                                     -20.0, 250.0, 0.0, 1.0,    # bottom left
-                                   290.0, 290.0, 0.0, 1.0,      # bottom right
+        """
+        vertexData = numpy.array([-10.0, -10.0, 0.0, 1.0,  # top left
+                                  -20.0, 250.0, 0.0, 1.0,  # bottom left
+                                  290.0, 290.0, 0.0, 1.0,  # bottom right
 
-                                     -10.0,   -10.0, 0.0, 1.0, # top left
-                                   290.0, 290.0, 0.0, 1.0,     # bottom right
-                                   250.0,   0.0, 0.0, 1.0,     # top right
+                                  -10.0, -10.0, 0.0, 1.0,  # top left
+                                  290.0, 290.0, 0.0, 1.0,  # bottom right
+                                  250.0,   0.0, 0.0, 1.0,  # top right
 
                                 # uv
                                 0, 1,
@@ -70,7 +68,10 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         # create VAO
         self.__VAO = glGenVertexArrays(1)
         glBindVertexArray(self.__VAO)
+        """
 
+
+        """
         # create a VBO for position and uv
         posVBO = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, posVBO)
@@ -87,17 +88,19 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         glBufferData(GL_ARRAY_BUFFER, colorData.nbytes, colorData, GL_STATIC_DRAW)
         glEnableVertexAttribArray(self.__colorLocation)
         glVertexAttribPointer(self.__colorLocation,    4, GL_FLOAT, GL_FALSE, 0, None)
+        """
 
         # unbind vao and vbo
-        glBindBuffer(GL_ARRAY_BUFFER, 0)
-        glBindVertexArray(0)
+        #glBindBuffer(GL_ARRAY_BUFFER, 0)
+        #glBindVertexArray(0)
         #pass
 
     def prepareFrameRect(self, x_offset, y_offset, frame_width, frame_height, zoom_factor):
-        xLeft = 0 + x_offset
+        """
+        xLeft  = 0 + x_offset
         xRight = frame_width + x_offset
 
-        yTop = 0 + y_offset
+        yTop    = 0 + y_offset
         yBottom = frame_height + y_offset
 
         invScale = 1.0 / zoom_factor
@@ -157,6 +160,7 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         # unbind vao and vbo
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
+        """
 
 
     def paintFullScreen(self, x_offset, y_offset, frame_width, frame_height, zoom_factor):
@@ -167,9 +171,9 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         """
         #self.prepareFrameRect(x_offset, y_offset, frame_width, frame_height, zoom_factor)
 
-        frameBufferA = QGLFramebufferObject(frame_width, frame_height)
+        #frameBufferA = QGLFramebufferObject(frame_width, frame_height)
+        #frameBufferA.bind()
 
-        frameBufferA.bind()
         """
         self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
         # bind VAO
@@ -177,13 +181,14 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         # draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
         """
-        frameBufferA.release()
+
+        #frameBufferA.release()
 
 
 
     # DRAW BUFFER !!!
     def paintGL(self):
-
+        """
         # DRAW SOMETHING
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
         # bind texture
@@ -192,5 +197,6 @@ class MyBufferPainter(QtOpenGL.QGLWidget):
         glBindVertexArray(self.__VAO)
         # draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
+        """
 
 

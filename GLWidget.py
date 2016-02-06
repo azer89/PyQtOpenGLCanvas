@@ -43,7 +43,6 @@ class GLWidget(QtOpenGL.QGLWidget):
     """
     This class renders something with OpenGL
     """
-
     def __init__(self, parent = None):
         """
         Constructor
@@ -61,12 +60,12 @@ class GLWidget(QtOpenGL.QGLWidget):
             f = QGLFormat()
             f.setVersion(3, 3)
             f.setProfile(QGLFormat.CoreProfile)
+            f.setSampleBuffers(True)
             c = QGLContext(f, None)
             QGLWidget.__init__(self, c, parent)
             print "Version is set to 3.3"
         else:
             QGLWidget.__init__(self, parent)
-
 
         #self.__svgItem = QtSvg.QGraphicsSvgItem("circle_star.svg")
         self.__mySvgTool = MySvgTool()
@@ -95,16 +94,18 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
-        self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
-        self.__myBufferPainter.initializeGL()
+        #self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
+        #self.__myBufferPainter.initializeGL(self.bindTexture(QtGui.QPixmap("laughing_man.png")))
+        #self.__myBufferPainter.paintFullScreen(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
 
-        self.__myBufferPainter.paintFullScreen(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
+        ### this is okay....
+        #frameBufferA = QGLFramebufferObject(self.width(), self.height())
+        #frameBufferA.bind()
+        #frameBufferA.release()
 
-        """
+
         # texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
-
-
 
         vertexData = numpy.array([   0.0,   0.0, 0.0, 1.0,
                                      0.0, 250.0, 0.0, 1.0,
@@ -156,7 +157,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         # unbind vao and vbo
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
-        """
+
 
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -179,12 +180,8 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         # feed the mpv matrix
         self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
-
-
         #self.__myBufferPainter.paintGL()
 
-
-        """
         # DRAW SOMETHING
         # bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
@@ -192,9 +189,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         glBindVertexArray(self.__VAO)
         # draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
-        """
-
-
 
         # unbind
         glBindVertexArray(0)
