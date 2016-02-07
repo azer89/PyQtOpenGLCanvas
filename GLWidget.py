@@ -58,10 +58,21 @@ class GLWidget(QtOpenGL.QGLWidget):
         if hasattr(QGLFormat, "setVersion"):
             # Modern OpenGL
             f = QGLFormat()
+            """
             f.setVersion(3, 3)
             f.setProfile(QGLFormat.CoreProfile)
             f.setSampleBuffers(True)
+            """
+
+            f.setVersion(3, 2)
+            f.setProfile(QGLFormat.CoreProfile)
+            f.setAlpha(True)
+            f.setDoubleBuffer(True)
+            f.setSampleBuffers(True)
+            f.setSamples(4)
+
             c = QGLContext(f, None)
+
             QGLWidget.__init__(self, c, parent)
             print "Version is set to 3.3"
         else:
@@ -74,12 +85,25 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__mySvgWriter.DrawSomething()
         self.__myBufferPainter = MyBufferPainter()
 
+
+
     def initializeGL(self):
+
+        #frameBufferA = QGLFramebufferObject(self.width(), self.height())
+        #if (frameBufferA.isValid()):
+        #    print "FRAME BUFFER VALID"
+
+
         glClearColor(0.5, 0.5, 0.5, 1.0)
-        glEnable(GL_DEPTH_TEST)
-        glEnable(GL_CULL_FACE)
-        glEnable(GL_LINE_SMOOTH)
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
+        #glEnable(GL_DEPTH_TEST)
+        #glEnable(GL_CULL_FACE)
+        #glEnable(GL_LINE_SMOOTH)
+        #glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
+
+        ### this is okay....
+        #frameBufferA = QGLFramebufferObject(self.width(), self.height())
+        #frameBufferA.bind()
+        #frameBufferA.release()
 
         self.__shaderProgram = QGLShaderProgram()
         if self.__shaderProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
@@ -98,12 +122,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__myBufferPainter.initializeGL(self.bindTexture(QtGui.QPixmap("laughing_man.png")))
         #self.__myBufferPainter.paintFullScreen(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
 
-        ### this is okay....
-        #frameBufferA = QGLFramebufferObject(self.width(), self.height())
-        #frameBufferA.bind()
-        #frameBufferA.release()
-
-
+        """
         ### texture
         self.__ori_tex = self.bindTexture(QtGui.QPixmap("laughing_man.png"))
 
@@ -157,10 +176,19 @@ class GLWidget(QtOpenGL.QGLWidget):
         ### unbind vao and vbo
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
+        """
 
 
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        ### this doesn't work
+
+
+
+        #frameBufferA.bind()
+        #frameBufferA.release()
+
         glViewport(0, 0, self.width() , self.height())
 
         orthoMatrix = QMatrix4x4()
@@ -180,8 +208,11 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         ### feed the mpv matrix
         self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
-        #self.__myBufferPainter.paintGL()
 
+        # Draw Something
+        self.__myBufferPainter.paintGL()
+
+        """
         ### DRAW SOMETHING
         ### bind texture
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
@@ -189,10 +220,12 @@ class GLWidget(QtOpenGL.QGLWidget):
         glBindVertexArray(self.__VAO)
         ### draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
+        """
 
         ### unbind
         glBindVertexArray(0)
         glUseProgram(0)
+
 
 
 

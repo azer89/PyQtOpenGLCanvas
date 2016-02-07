@@ -1,10 +1,8 @@
 
 """
 Some examples:
-
 http://stackoverflow.com/questions/21574723/save-image-from-opengl-pyqt-in-high-resolution
 """
-
 
 import numpy
 
@@ -18,9 +16,7 @@ from PyQt4.QtOpenGL import QGLFramebufferObject
 
 class MyBufferPainter(object):
 
-    #def __init__(self, parent = None):
     def __init__(self):
-        #QGLWidget.__init__(self, parent)
         print "MyBufferPainter"
 
     def SetThings(self, shaderProgram, texCoordLocation, vertexLocation, colorLocation, use_color_location, mvpMatrixLocation):
@@ -37,26 +33,21 @@ class MyBufferPainter(object):
         ### texture
         self.__ori_tex = ori_tex
 
-
         vertexData = numpy.array([-10.0, -10.0, 0.0, 1.0,  # top left
                                   -20.0, 250.0, 0.0, 1.0,  # bottom left
                                   290.0, 290.0, 0.0, 1.0,  # bottom right
-
                                   -10.0, -10.0, 0.0, 1.0,  # top left
                                   290.0, 290.0, 0.0, 1.0,  # bottom right
                                   250.0,   0.0, 0.0, 1.0,  # top right
+                                  # uv
+                                  0, 1,
+                                  0, 0,
+                                  1, 0,
+                                  0, 1,
+                                  1, 0,
+                                  1, 1],
 
-                                # uv
-                                0, 1,
-                                0, 0,
-                                1, 0,
-
-                                0, 1,
-                                1, 0,
-                                1, 1],
                                 dtype = numpy.float32)
-
-
         colorData = numpy.array([1.0, 0.0, 0.0, 1.0,
                                  0.0, 0.0, 1.0, 1.0,
                                  0.0, 1.0, 0.0, 1.0,
@@ -166,24 +157,28 @@ class MyBufferPainter(object):
         """
         #self.prepareFrameRect(x_offset, y_offset, frame_width, frame_height, zoom_factor)
 
-        #frameBufferA = QGLFramebufferObject(frame_width, frame_height)
-        #frameBufferA.bind()
-
+        frameBufferA = QGLFramebufferObject(frame_width, frame_height)
+        frameBufferA.bind()
         """
         self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
-        # bind VAO
+        ### bind VAO
         glBindVertexArray(self.__bufferVAO)
-        # draw triangle
+        ### draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
         """
-
-        #frameBufferA.release()
+        frameBufferA.release()
 
 
 
     ### DRAW BUFFER !!!
     def paintGL(self):
+
         """
+        frameBufferA = QGLFramebufferObject(256, 256)
+        if (frameBufferA.isValid()):
+            print "FRAME BUFFER VALID"
+        """
+
         ### DRAW SOMETHING
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
         ### bind texture
@@ -192,6 +187,10 @@ class MyBufferPainter(object):
         glBindVertexArray(self.__VAO)
         ### draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 18)
-        """
+
+        ### unbind
+        glBindVertexArray(0)
+        glUseProgram(0)
+
 
 
