@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a10b2903-b1ef-4e88-a326-8ade591c878c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GLWidget.py" afterPath="$PROJECT_DIR$/GLWidget.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyBufferPainter.py" afterPath="$PROJECT_DIR$/MyBufferPainter.py" />
     </list>
     <ignored path="PyQtOpenGLCanvas.iws" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5334207">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.310616">
+              <caret line="205" column="76" selection-start-line="205" selection-start-column="76" selection-end-line="205" selection-end-column="76" />
               <folding>
                 <element signature="e#1#13#0" expanded="true" />
               </folding>
@@ -41,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/GLWidget.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+              <caret line="153" column="8" selection-start-line="153" selection-start-column="8" selection-end-line="153" selection-end-column="58" />
               <folding>
                 <element signature="e#32#42#0" expanded="true" />
                 <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
@@ -732,7 +731,7 @@
     <entry file="file://$PROJECT_DIR$/GLWidget.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+          <caret line="153" column="8" selection-start-line="153" selection-start-column="8" selection-end-line="153" selection-end-column="58" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
             <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
@@ -742,8 +741,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5334207">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.310616">
+          <caret line="205" column="76" selection-start-line="205" selection-start-column="76" selection-end-line="205" selection-end-column="76" />
           <folding>
             <element signature="e#1#13#0" expanded="true" />
           </folding>

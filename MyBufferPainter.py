@@ -42,6 +42,9 @@ http://pyqt.sourceforge.net/Docs/PyQt4/qglframebufferobject.html#QGLFramebufferO
 #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer)
 #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
 
+### songho FBO
+# http://www.songho.ca/opengl/gl_fbo.html
+
 class MyBufferPainter(object):
 
     def __init__(self):
@@ -60,6 +63,10 @@ class MyBufferPainter(object):
         self.__bufferVAO = None
 
     def initializeGL(self, ori_tex):
+
+
+
+
         ### texture
         self.__ori_tex = ori_tex
 
@@ -192,7 +199,27 @@ class MyBufferPainter(object):
 
         self.prepareFrameRect(x_offset, y_offset, frame_width, frame_height, zoom_factor)
 
+
+        #render_buffer = glGenRenderbuffers(1)
+        #glBindRenderbuffer(GL_RENDERBUFFER, render_buffer)
+
+        # read this: https://www.opengl.org/wiki/Framebuffer_Object_Examples
+        render_buffer = glGenRenderbuffers(1)
+        frame_buffer = glGenFramebuffers(1)
+        #print frame_buffer
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer)
+
+
+        #glClearColor(0.0, 0.0, 0.0, 0.0)
+        #glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
+        glDeleteFramebuffers(1, [frame_buffer])
+        glDeleteRenderbuffers(1, [render_buffer])
+
         ### DRAW JUNK !!!
+
         self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
         #glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
         ### bind VAO
@@ -200,9 +227,14 @@ class MyBufferPainter(object):
         ### draw triangle
         glDrawArrays(GL_TRIANGLES, 0, 6)
 
+        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
+
         glBindVertexArray(0)
         #glBindTexture(GL_TEXTURE_2D, 0)
         #glBindVertexArray(0)
+
+        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
+        #glDeleteFramebuffers(1, frame_buffer)
 
         ### DRAW SOMETHING
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
