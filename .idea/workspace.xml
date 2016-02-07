@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-81.57143">
-              <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.5334207">
+              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding>
                 <element signature="e#1#13#0" expanded="true" />
               </folding>
@@ -37,14 +37,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GLWidget.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5451128">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
               <folding>
                 <element signature="e#32#42#0" expanded="true" />
-                <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+                <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -69,8 +69,8 @@
         <option value="$PROJECT_DIR$/SVGWriter.py" />
         <option value="$PROJECT_DIR$/MySvgTool.py" />
         <option value="$PROJECT_DIR$/MySvgWriter.py" />
-        <option value="$PROJECT_DIR$/MyBufferPainter.py" />
         <option value="$PROJECT_DIR$/GLWidget.py" />
+        <option value="$PROJECT_DIR$/MyBufferPainter.py" />
       </list>
     </option>
   </component>
@@ -363,7 +363,7 @@
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+            <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -417,7 +417,7 @@
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+            <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -471,7 +471,7 @@
           <caret line="9" column="78" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="78" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+            <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -525,7 +525,7 @@
           <caret line="9" column="78" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="78" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+            <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -579,7 +579,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+            <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -729,23 +729,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
+    <entry file="file://$PROJECT_DIR$/GLWidget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-81.57143">
-          <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="191" column="0" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
           <folding>
-            <element signature="e#1#13#0" expanded="true" />
+            <element signature="e#32#42#0" expanded="true" />
+            <marker date="1454881843173" expanded="true" signature="629:7107" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GLWidget.py">
+    <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5451128">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.5334207">
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding>
-            <element signature="e#32#42#0" expanded="true" />
-            <marker date="1454878205033" expanded="true" signature="630:7915" placeholder="..." />
+            <element signature="e#1#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

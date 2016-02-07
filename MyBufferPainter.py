@@ -37,6 +37,11 @@ http://pyqt.sourceforge.net/Docs/PyQt4/qglframebufferobject.html#QGLFramebufferO
 ### pyqt4 examples, still using the old opengl:
 # https://github.com/Werkov/PyQt4/tree/master/examples
 
+# http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-14-render-to-texture/
+#frame_buffer = glGenFramebuffers(1)
+#glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer)
+#glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
+
 class MyBufferPainter(object):
 
     def __init__(self):
@@ -51,14 +56,17 @@ class MyBufferPainter(object):
         self.__use_color_location = use_color_location
         self.__mvpMatrixLocation  = mvpMatrixLocation
 
+        self.__VAO = None
+        self.__bufferVAO = None
+
     def initializeGL(self, ori_tex):
         ### texture
         self.__ori_tex = ori_tex
 
-        vertexData = numpy.array([-10.0, -10.0, 0.0, 1.0,  # top left
+        vertexData = numpy.array([-30.0, -30.0, 0.0, 1.0,  # top left
                                   -20.0, 250.0, 0.0, 1.0,  # bottom left
                                   290.0, 290.0, 0.0, 1.0,  # bottom right
-                                  -10.0, -10.0, 0.0, 1.0,  # top left
+                                  -30.0, -30.0, 0.0, 1.0,  # top left
                                   290.0, 290.0, 0.0, 1.0,  # bottom right
                                   250.0,   0.0, 0.0, 1.0,  # top right
                                   # uv
@@ -79,7 +87,9 @@ class MyBufferPainter(object):
                                  dtype = numpy.float32)
 
         ### create VAO
-        self.__VAO = glGenVertexArrays(1)
+        if self.__VAO is None:
+            self.__VAO = glGenVertexArrays(1)
+
         glBindVertexArray(self.__VAO)
 
         ### create a VBO for position and uv
@@ -112,6 +122,8 @@ class MyBufferPainter(object):
 
         invScale = 1.0 / zoom_factor
 
+        #print xLeft, " ", yTop
+
         xLeft   *= invScale
         xRight  *= invScale
         yTop    *= invScale
@@ -123,7 +135,13 @@ class MyBufferPainter(object):
                                   xLeft,  yTop,    -5.0, 1.0,  # top left
                                   xRight, yBottom, -5.0, 1.0,  # bottom right
                                   xRight, yTop,    -5.0, 1.0,   # top right
-                                  ],
+                                  # uv
+                                  0, 1,
+                                  0, 0,
+                                  1, 0,
+                                  0, 1,
+                                  1, 0,
+                                  1, 1],
                                   dtype = numpy.float32)
 
         colorData = numpy.array([1.0, 0.0, 0.0, 1.0,
@@ -139,7 +157,9 @@ class MyBufferPainter(object):
         #glBindVertexArray(0)
 
         ### create VAO
-        self.__bufferVAO = glGenVertexArrays(1)
+        if self.__bufferVAO is None:
+            self.__bufferVAO = glGenVertexArrays(1)
+
         glBindVertexArray(self.__bufferVAO)
 
         ### create a VBO for position and uv
@@ -150,8 +170,8 @@ class MyBufferPainter(object):
         glVertexAttribPointer(self.__vertexLocation, 4, GL_FLOAT, GL_FALSE, 0, None)
 
         # uncomment these
-        #glEnableVertexAttribArray(self.__texCoordLocation)
-        #glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(96))
+        glEnableVertexAttribArray(self.__texCoordLocation)
+        glVertexAttribPointer(self.__texCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(96))
 
         ### create VBO for color
         colVBO = glGenBuffers(1)
@@ -170,24 +190,19 @@ class MyBufferPainter(object):
     ### DRAW BUFFER !!!
     def paintGL(self, x_offset, y_offset, frame_width, frame_height, zoom_factor):
 
-        #self.prepareFrameRect(x_offset, y_offset, frame_width, frame_height, zoom_factor)
+        self.prepareFrameRect(x_offset, y_offset, frame_width, frame_height, zoom_factor)
 
-        # http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-14-render-to-texture/
-        #frame_buffer = glGenFramebuffers(1)
-        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer)
-        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
-
-
-
-
-        ### DRAW BACK
+        ### DRAW JUNK !!!
         self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
+        #glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
         ### bind VAO
         glBindVertexArray(self.__bufferVAO)
         ### draw triangle
-        glDrawArrays(GL_TRIANGLES, 0, 18)
+        glDrawArrays(GL_TRIANGLES, 0, 6)
 
         glBindVertexArray(0)
+        #glBindTexture(GL_TEXTURE_2D, 0)
+        #glBindVertexArray(0)
 
         ### DRAW SOMETHING
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
@@ -196,16 +211,16 @@ class MyBufferPainter(object):
         ### bind VAO
         glBindVertexArray(self.__VAO)
         ### draw triangle
-        glDrawArrays(GL_TRIANGLES, 0, 18)
+        glDrawArrays(GL_TRIANGLES, 0, 6)
 
          ### unbind
         glBindVertexArray(0)
+        glBindTexture(GL_TEXTURE_2D, 0)
         #glUseProgram(0)
 
-
         ### unbind
-        glBindVertexArray(0)
-        glUseProgram(0)
+        #glBindVertexArray(0)
+        #glUseProgram(0)
 
 
 

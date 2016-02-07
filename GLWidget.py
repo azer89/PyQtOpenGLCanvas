@@ -25,7 +25,6 @@ from MyBufferPainter import MyBufferPainter
 
 #from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
 #from PyQt4.QtGui import QMatrix4x4
-
 ### didn't work !!!
 #import glsvg
 
@@ -48,19 +47,9 @@ class GLWidget(QtOpenGL.QGLWidget):
         if hasattr(QGLFormat, "setVersion"):
             # Modern OpenGL
             f = QGLFormat()
-            """
             f.setVersion(3, 3)
             f.setProfile(QGLFormat.CoreProfile)
             f.setSampleBuffers(True)
-            """
-
-            f.setVersion(3, 2)
-            f.setProfile(QGLFormat.CoreProfile)
-            #f.setAlpha(True)
-            #f.setDoubleBuffer(True)
-            #f.setSampleBuffers(True)
-            #f.setSamples(4)
-
             c = QGLContext(f, None)
 
             QGLWidget.__init__(self, c, parent)
@@ -81,29 +70,11 @@ class GLWidget(QtOpenGL.QGLWidget):
 
     def initializeGL(self):
 
-        #frameBufferA = QGLFramebufferObject(self.width(), self.height())
-        #if (frameBufferA.isValid()):
-        #    print "FRAME BUFFER VALID"
-
-
-        #if (QGLFramebufferObject.hasOpenGLFramebufferBlit()) :
-        #    print "QGLFramebufferObject.hasOpenGLFramebufferBlit()"
-            #format = QGLFramebufferObjectFormat()
-            #format.setSamples(4)
-            #format.setAttachment(QGLFramebufferObject.CombinedDepthStencil)
-            #render_fbo = QGLFramebufferObject(512, 512, format)
-
-
         glClearColor(0.5, 0.5, 0.5, 1.0)
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_CULL_FACE)
         glEnable(GL_LINE_SMOOTH)
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
-
-        ### this is okay....
-        #frameBufferA = QGLFramebufferObject(self.width(), self.height())
-        #frameBufferA.bind()
-        #frameBufferA.release()
 
         self.__shaderProgram = QGLShaderProgram()
         if self.__shaderProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
@@ -186,8 +157,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         #frameBufferA.bind()
         #frameBufferA.release()
 
-
-
         glViewport(0, 0, self.width() , self.height())
 
         orthoMatrix = QMatrix4x4()
@@ -222,11 +191,15 @@ class GLWidget(QtOpenGL.QGLWidget):
         """
 
         ### unbind
-        glBindVertexArray(0)
-        glUseProgram(0)
+        #glBindVertexArray(0)
+        #glUseProgram(0)
+        self.__shaderProgram.release()
 
+    def SetSomething(self):
+        pass
 
-
+    def DrawSomething(self):
+        pass
 
 
     def ZoomIn(self):
