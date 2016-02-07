@@ -17,27 +17,17 @@ from PyQt4.QtGui import QWidget
 from PyQt4 import QtCore
 from PyQt4 import QtSvg
 
-#from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
-#from PyQt4.QtGui import QMatrix4x4
+from OpenGL.GL.framebufferobjects import *
 
 from MySvgTool import MySvgTool
 from MySvgWriter import MySvgWriter
 from MyBufferPainter import MyBufferPainter
 
+#from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
+#from PyQt4.QtGui import QMatrix4x4
+
 ### didn't work !!!
 #import glsvg
-
-### this:
-# http://ftp.ics.uci.edu/pub/centos0/ics-custom-build/BUILD/PyQt-x11-gpl-4.7.2/examples/painting/svgviewer/svgviewer.py
-
-### ???
-# http://stackoverflow.com/questions/8016050/pyqt-with-interactive-svg-images
-
-### render svg using frame buffer
-# https://github.com/RSATom/Qt/tree/master/qtsvg/examples/svg/opengl
-
-### parse with something and render using qt
-# http://stackoverflow.com/questions/1359003/svg-example-in-c-c
 
 class GLWidget(QtOpenGL.QGLWidget):
     """
@@ -66,10 +56,10 @@ class GLWidget(QtOpenGL.QGLWidget):
 
             f.setVersion(3, 2)
             f.setProfile(QGLFormat.CoreProfile)
-            f.setAlpha(True)
-            f.setDoubleBuffer(True)
-            f.setSampleBuffers(True)
-            f.setSamples(4)
+            #f.setAlpha(True)
+            #f.setDoubleBuffer(True)
+            #f.setSampleBuffers(True)
+            #f.setSamples(4)
 
             c = QGLContext(f, None)
 
@@ -87,6 +77,8 @@ class GLWidget(QtOpenGL.QGLWidget):
 
 
 
+
+
     def initializeGL(self):
 
         #frameBufferA = QGLFramebufferObject(self.width(), self.height())
@@ -94,11 +86,19 @@ class GLWidget(QtOpenGL.QGLWidget):
         #    print "FRAME BUFFER VALID"
 
 
+        #if (QGLFramebufferObject.hasOpenGLFramebufferBlit()) :
+        #    print "QGLFramebufferObject.hasOpenGLFramebufferBlit()"
+            #format = QGLFramebufferObjectFormat()
+            #format.setSamples(4)
+            #format.setAttachment(QGLFramebufferObject.CombinedDepthStencil)
+            #render_fbo = QGLFramebufferObject(512, 512, format)
+
+
         glClearColor(0.5, 0.5, 0.5, 1.0)
-        #glEnable(GL_DEPTH_TEST)
-        #glEnable(GL_CULL_FACE)
-        #glEnable(GL_LINE_SMOOTH)
-        #glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
+        glEnable(GL_DEPTH_TEST)
+        glEnable(GL_CULL_FACE)
+        glEnable(GL_LINE_SMOOTH)
+        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
 
         ### this is okay....
         #frameBufferA = QGLFramebufferObject(self.width(), self.height())
@@ -120,7 +120,7 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
         self.__myBufferPainter.initializeGL(self.bindTexture(QtGui.QPixmap("laughing_man.png")))
-        #self.__myBufferPainter.paintFullScreen(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
+        self.__myBufferPainter.prepareFrameRect(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
 
         """
         ### texture
@@ -183,11 +183,10 @@ class GLWidget(QtOpenGL.QGLWidget):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         ### this doesn't work
-
-
-
         #frameBufferA.bind()
         #frameBufferA.release()
+
+
 
         glViewport(0, 0, self.width() , self.height())
 
@@ -210,7 +209,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
 
         # Draw Something
-        self.__myBufferPainter.paintGL()
+        self.__myBufferPainter.paintGL(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
 
         """
         ### DRAW SOMETHING
