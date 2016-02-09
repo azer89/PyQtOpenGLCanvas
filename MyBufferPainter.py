@@ -200,59 +200,83 @@ class MyBufferPainter(object):
         self.prepareFrameRect(x_offset, y_offset, frame_width, frame_height, zoom_factor)
 
 
+
         #render_buffer = glGenRenderbuffers(1)
         #glBindRenderbuffer(GL_RENDERBUFFER, render_buffer)
-
         # read this: https://www.opengl.org/wiki/Framebuffer_Object_Examples
-        render_buffer = glGenRenderbuffers(1)
-        frame_buffer = glGenFramebuffers(1)
+        # render_buffer = glGenRenderbuffers(1)
+        #frame_buffer = glGenFramebuffers(1)
         #print frame_buffer
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer)
-
-
+        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer)
         #glClearColor(0.0, 0.0, 0.0, 0.0)
         #glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
+        #glDeleteFramebuffers(1, [frame_buffer])
+        #glDeleteRenderbuffers(1, [render_buffer])
 
+        ### http://www.songho.ca/opengl/gl_fbo.html
 
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
-        glDeleteFramebuffers(1, [frame_buffer])
-        glDeleteRenderbuffers(1, [render_buffer])
+        # create a texture object
+        textureId = glGenTextures(1)
+        glBindTexture(GL_TEXTURE_2D, textureId)
+        # glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        # glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
+        # glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+        # glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+        # glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE) # automatic mipmap
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, frame_width, frame_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0)
+        glBindTexture(GL_TEXTURE_2D, 0)
+
+        # create a renderbuffer object to store depth info
+        rboId = glGenRenderbuffers(1)
+        glBindRenderbuffer(GL_RENDERBUFFER, rboId)
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, frame_width, frame_height)
+        glBindRenderbuffer(GL_RENDERBUFFER, 0)
+
+        # create a framebuffer object
+        fboId = glGenFramebuffers(1)
+        glBindFramebuffer(GL_FRAMEBUFFER, fboId)
+
+        # attach the texture to FBO color attachment point
+        glFramebufferTexture2D(GL_FRAMEBUFFER,        # 1. fbo target: GL_FRAMEBUFFER
+                               GL_COLOR_ATTACHMENT0,  # 2. attachment point
+                               GL_TEXTURE_2D,         # 3. tex target: GL_TEXTURE_2D
+                               textureId,             # 4. tex ID
+                               0)                    # 5. mipmap level: 0(base)
+
+        # attach the renderbuffer to depth attachment point
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER,      # 1. fbo target: GL_FRAMEBUFFER
+                                    GL_DEPTH_ATTACHMENT, # 2. attachment point
+                                    GL_RENDERBUFFER,     # 3. rbo target: GL_RENDERBUFFER
+                                    rboId)              # 4. rbo ID
+
+        # check FBO status
+        status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
+        if(status is not GL_FRAMEBUFFER_COMPLETE):
+            print "FBO shit"
+            fboUsed = False
+
+        # switch back to window-system-provided framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0)
 
         ### DRAW JUNK !!!
-
         self.__shaderProgram.setUniformValue(self.__use_color_location, 1.0)
         #glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
-        ### bind VAO
-        glBindVertexArray(self.__bufferVAO)
-        ### draw triangle
-        glDrawArrays(GL_TRIANGLES, 0, 6)
+        glBindVertexArray(self.__bufferVAO) ### bind VAO
+        glDrawArrays(GL_TRIANGLES, 0, 6)    ### draw triangle
+        glBindVertexArray(0)                ### unbind
+        #glBindTexture(GL_TEXTURE_2D, 0)    ### unbind
+        #glBindVertexArray(0)               ### unbind
 
-        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
-
-        glBindVertexArray(0)
-        #glBindTexture(GL_TEXTURE_2D, 0)
-        #glBindVertexArray(0)
-
-        #glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0)
-        #glDeleteFramebuffers(1, frame_buffer)
 
         ### DRAW SOMETHING
         self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
-        ### bind texture
-        glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
-        ### bind VAO
-        glBindVertexArray(self.__VAO)
-        ### draw triangle
-        glDrawArrays(GL_TRIANGLES, 0, 6)
-
-         ### unbind
-        glBindVertexArray(0)
-        glBindTexture(GL_TEXTURE_2D, 0)
-        #glUseProgram(0)
-
-        ### unbind
-        #glBindVertexArray(0)
-        #glUseProgram(0)
+        glBindTexture(GL_TEXTURE_2D, self.__ori_tex)     ### bind texture
+        glBindVertexArray(self.__VAO)       ### bind VAO
+        glDrawArrays(GL_TRIANGLES, 0, 6)    ### draw triangle
+        glBindVertexArray(0)                ### unbind
+        glBindTexture(GL_TEXTURE_2D, 0)     ### unbind
+        #glUseProgram(0)                    ### unbind
 
 
 
