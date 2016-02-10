@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a10b2903-b1ef-4e88-a326-8ade591c878c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gaussian_blur.frag" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GLWidget.py" afterPath="$PROJECT_DIR$/GLWidget.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyBufferPainter.py" afterPath="$PROJECT_DIR$/MyBufferPainter.py" />
@@ -59,8 +58,8 @@
       <file leaf-file-name="MyBufferPainter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48354793">
-              <caret line="284" column="31" selection-start-line="284" selection-start-column="31" selection-end-line="284" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.52646637">
+              <caret line="285" column="36" selection-start-line="285" selection-start-column="35" selection-end-line="285" selection-end-column="36" />
               <folding>
                 <element signature="e#1#13#0" expanded="true" />
               </folding>
@@ -71,11 +70,11 @@
       <file leaf-file-name="GLWidget.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GLWidget.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.5714285">
-              <caret line="200" column="18" selection-start-line="200" selection-start-column="18" selection-end-line="200" selection-end-column="18" />
+            <state vertical-scroll-proportion="-10.142858">
+              <caret line="94" column="76" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
               <folding>
                 <element signature="e#32#42#0" expanded="true" />
-                <marker date="1455123848614" expanded="true" signature="629:7439" placeholder="..." />
+                <marker date="1455132136527" expanded="true" signature="629:7531" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -100,8 +99,8 @@
         <option value="$PROJECT_DIR$/SVGWriter.py" />
         <option value="$PROJECT_DIR$/MySvgTool.py" />
         <option value="$PROJECT_DIR$/MySvgWriter.py" />
-        <option value="$PROJECT_DIR$/GLWidget.py" />
         <option value="$PROJECT_DIR$/gaussian_blur.frag" />
+        <option value="$PROJECT_DIR$/GLWidget.py" />
         <option value="$PROJECT_DIR$/MyBufferPainter.py" />
       </list>
     </option>
@@ -434,7 +433,7 @@
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1455123848614" expanded="true" signature="629:7439" placeholder="..." />
+            <marker date="1455132136527" expanded="true" signature="629:7531" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -488,7 +487,7 @@
           <caret line="9" column="78" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="78" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1455123848614" expanded="true" signature="629:7439" placeholder="..." />
+            <marker date="1455132136527" expanded="true" signature="629:7531" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -542,7 +541,7 @@
           <caret line="9" column="78" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="78" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1455123848614" expanded="true" signature="629:7439" placeholder="..." />
+            <marker date="1455132136527" expanded="true" signature="629:7531" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -596,7 +595,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#32#42#0" expanded="true" />
-            <marker date="1455123848614" expanded="true" signature="629:7439" placeholder="..." />
+            <marker date="1455132136527" expanded="true" signature="629:7531" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -729,17 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GLWidget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5714285">
-          <caret line="200" column="18" selection-start-line="200" selection-start-column="18" selection-end-line="200" selection-end-column="18" />
-          <folding>
-            <element signature="e#32#42#0" expanded="true" />
-            <marker date="1455123848614" expanded="true" signature="629:7439" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shader.frag">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -764,10 +752,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GLWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.142858">
+          <caret line="94" column="76" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
+          <folding>
+            <element signature="e#32#42#0" expanded="true" />
+            <marker date="1455132136527" expanded="true" signature="629:7531" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyBufferPainter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48354793">
-          <caret line="284" column="31" selection-start-line="284" selection-start-column="31" selection-end-line="284" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.52646637">
+          <caret line="285" column="36" selection-start-line="285" selection-start-column="35" selection-end-line="285" selection-end-column="36" />
           <folding>
             <element signature="e#1#13#0" expanded="true" />
           </folding>
