@@ -78,9 +78,9 @@ class GLWidget(QtOpenGL.QGLWidget):
 
         self.__shaderProgram = QGLShaderProgram()
         if self.__shaderProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
-            print "Vertex shader OK"
+            print "Main - Vertex shader OK"
         if self.__shaderProgram.addShaderFromSourceFile(QGLShader.Fragment, "shader.frag") :
-            print "Fragment shader OK"
+            print "Main - Fragment shader OK"
         self.__shaderProgram.link()
 
         self.__texCoordLocation   = self.__shaderProgram.attributeLocation("uv")
@@ -89,7 +89,14 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
-        self.__myBufferPainter.SetThings(self.__shaderProgram, self.__texCoordLocation, self.__vertexLocation, self.__colorLocation, self.__use_color_location, self.__mvpMatrixLocation )
+        self.__blurProgram = QGLShaderProgram()
+        if self.__blurProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
+            print "Gaussian blur - Vertex shader OK"
+        if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "gaussian_blur.frag") :
+            print "Gaussian blur - fragment shader OK"
+        self.__blurProgram.link()
+
+        self.__myBufferPainter.SetThings(self.__shaderProgram, self.__blurProgram)
         self.__myBufferPainter.initializeGL(self.bindTexture(QtGui.QPixmap("laughing_man.png")))
         self.__myBufferPainter.prepareFrameRect(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
 
@@ -170,15 +177,16 @@ class GLWidget(QtOpenGL.QGLWidget):
         transformMatrix.scale(self.__zoomFactor)
 
         ### activate shader program
-        self.__shaderProgram.bind()
+        #self.__shaderProgram.bind()
         ### set a shader attribute (0 means use texture, 1 means use color)
         #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
 
         ### feed the mpv matrix
-        self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, orthoMatrix * transformMatrix)
+        mpvMatrix = orthoMatrix * transformMatrix
+        #self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, mpvMatrix)
 
         # Draw Something
-        self.__myBufferPainter.paintGL(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor)
+        self.__myBufferPainter.paintGL(self.__scrollOffset.x(),  self.__scrollOffset.y(), self.width(), self.height(), self.__zoomFactor, mpvMatrix)
 
         """
         ### DRAW SOMETHING
@@ -193,7 +201,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         ### unbind
         #glBindVertexArray(0)
         #glUseProgram(0)
-        self.__shaderProgram.release()
+        #self.__shaderProgram.release()
 
     def SetSomething(self):
         pass
