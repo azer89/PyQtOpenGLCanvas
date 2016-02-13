@@ -1,4 +1,8 @@
 
+"""
+radhitya@uwaterloo.ca
+"""
+
 from PyQt4.QtCore import QSize, QRect
 
 from PyQt4 import QtSvg

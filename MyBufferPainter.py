@@ -1,4 +1,9 @@
 
+
+"""
+radhitya@uwaterloo.ca
+"""
+
 import numpy
 
 from OpenGL.GL import *
@@ -41,8 +46,8 @@ class MyBufferPainter(object):
         self.__texCoordLocation2   = self.__blurProgram.attributeLocation("uv")
         self.__vertexLocation2     = self.__blurProgram.attributeLocation("position")
 
-        #self.__colorLocation2      = self.__blurProgram.attributeLocation("color")
-        #self.__use_color_location2 = self.__blurProgram.uniformLocation("use_color")
+        self.__colorLocation2      = self.__blurProgram.attributeLocation("color")
+        self.__use_color_location2 = self.__blurProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation2  = self.__blurProgram.uniformLocation("mvpMatrix")
         self.__blurResXLoc = self.__blurProgram.uniformLocation("resolutionx")
         self.__blurResYLoc = self.__blurProgram.uniformLocation("resolutiony")
@@ -252,7 +257,7 @@ class MyBufferPainter(object):
 
         ### DRAW JUNK !!!
         #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
-        self.__blurProgram.setUniformValue(self.__use_color_location, 0.0)
+        self.__blurProgram.setUniformValue(self.__use_color_location2, 0.0)
         glBindTexture(GL_TEXTURE_2D, self.__ori_tex)
         glBindVertexArray(self.__bufferVAO) ### bind VAO
         glDrawArrays(GL_TRIANGLES, 0, 6)    ### draw triangle
