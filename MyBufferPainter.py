@@ -250,7 +250,7 @@ class MyBufferPainter(object):
         #self.__blurProgram.setUniformValue(self.__blurDirXLoc, 1.0)
         #self.__blurProgram.setUniformValue(self.__blurDirYLoc, 0.0)
 
-        glBindFramebuffer(GL_FRAMEBUFFER, self.__fboId3)
+        glBindFramebuffer(GL_FRAMEBUFFER, self.__fboId1) ##############################
 
         ###  clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -265,7 +265,7 @@ class MyBufferPainter(object):
         #glBindTexture(GL_TEXTURE_2D, 0)    ### unbind
         #glBindVertexArray(0)               ### unbind
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0)
+        glBindFramebuffer(GL_FRAMEBUFFER, 0) ##############################
 
         #self.__shaderProgram.release()
         self.__blurProgram.release()
@@ -280,7 +280,7 @@ class MyBufferPainter(object):
         #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
         self.__blurProgram.setUniformValue(self.__use_color_location, 0.0)
         #glBindTexture(GL_TEXTURE_2D, self.__ori_tex)     ### bind texture
-        glBindTexture(GL_TEXTURE_2D, self.__bufTextureId3)
+        glBindTexture(GL_TEXTURE_2D, self.__bufTextureId1) ##############################
         glBindVertexArray(self.__VAO)       ### bind VAO
         glDrawArrays(GL_TRIANGLES, 0, 6)    ### draw triangle
         glBindVertexArray(0)                ### unbind

@@ -92,6 +92,8 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__blurProgram = QGLShaderProgram()
         if self.__blurProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
             print "Gaussian blur - Vertex shader OK"
+
+        # if I use shader.frag it's okay ???
         #if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "gaussian_blur.frag") :
         if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "shader.frag") :
             print "Gaussian blur - fragment shader OK"

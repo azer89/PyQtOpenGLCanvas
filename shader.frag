@@ -3,6 +3,7 @@
 in vec2 theUV;
 in vec4 theColor;
 out vec4 outputColor;
+
 uniform float use_color;
 uniform sampler2D base_texture;
 
