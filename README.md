@@ -4,6 +4,4 @@ I use Anaconda to develop this project (https://www.continuum.io/downloads). The
 
 To do:
 * Parse and Render SVG using OpenGL and QT
-* Need to fix FBO implementation
-
-
+* Need to full screen shading
