@@ -25,8 +25,10 @@ from MyBufferPainter import MyBufferPainter
 
 #from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
 #from PyQt4.QtGui import QMatrix4x4
+
 ### didn't work !!!
 #import glsvg
+
 
 class GLWidget(QtOpenGL.QGLWidget):
     """
@@ -65,9 +67,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__myBufferPainter = MyBufferPainter()
 
 
-
-
-
     def initializeGL(self):
 
         glClearColor(0.5, 0.5, 0.5, 1.0)
@@ -89,13 +88,21 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.__use_color_location = self.__shaderProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation  = self.__shaderProgram.uniformLocation("mvpMatrix")
 
+        # Returns -1 if name is not a valid attribute for this shader program.
+        print "\n__texCoordLocation   :", self.__texCoordLocation, " ",   \
+              "\n__vertexLocation     :", self.__vertexLocation, " ",     \
+              "\n__colorLocation      :", self.__colorLocation, " ",      \
+              "\n__use_color_location :", self.__use_color_location, " ", \
+              "\n__mvpMatrixLocation  :", self.__mvpMatrixLocation
+
+
         self.__blurProgram = QGLShaderProgram()
         if self.__blurProgram.addShaderFromSourceFile(QGLShader.Vertex, "shader.vert") :
             print "Gaussian blur - Vertex shader OK"
 
         # if I use shader.frag it's okay ???
-        #if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "gaussian_blur.frag") :
-        if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "shader.frag") :
+        # if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "gaussian_blur.frag") :
+        if self.__blurProgram.addShaderFromSourceFile(QGLShader.Fragment, "gaussian_blur.frag") :
             print "Gaussian blur - fragment shader OK"
         self.__blurProgram.link()
 

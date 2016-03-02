@@ -55,8 +55,17 @@ class MyBufferPainter(object):
         self.__blurDirXLoc = self.__blurProgram.uniformLocation("dirx")
         self.__blurDirYLoc = self.__blurProgram.uniformLocation("diry")
 
-        print self.__texCoordLocation2, " ", self.__vertexLocation2, " ", self.__mvpMatrixLocation2
-        print self.__blurResXLoc, " ", self.__blurResYLoc, " ", self.__blurRadiusLoc, " ", self.__blurDirXLoc, " ", self.__blurDirYLoc
+        # Returns -1 if name is not a valid attribute for this shader program.
+        print "\n__texCoordLocation2  :", self.__texCoordLocation2, " ", \
+              "\n__vertexLocation2    :", self.__vertexLocation2, " ", \
+              "\n__mvpMatrixLocation2 :", self.__mvpMatrixLocation2
+
+        # Returns -1 if name is not a valid attribute for this shader program.
+        print "\n__blurResXLoc        :", self.__blurResXLoc, " ", \
+              "\n__blurResYLoc        :", self.__blurResYLoc, " ", \
+              "\n__blurRadiusLoc      :", self.__blurRadiusLoc, " ", \
+              "\n__blurDirXLoc        :", self.__blurDirXLoc, " ", \
+              "\n__blurDirYLoc        :", self.__blurDirYLoc
 
         self.__VAO = None
         self.__bufferVAO = None
@@ -247,6 +256,7 @@ class MyBufferPainter(object):
 
         #self.__blurProgram.setUniformValue(self.__blurRadiusLoc, 1.0 / zoom_factor)
         #self.__blurProgram.setUniformValue(self.__blurResXLoc, frame_width)
+        #self.__blurProgram.setUniformValue(self.__blurResYLoc, frame_height)
         #self.__blurProgram.setUniformValue(self.__blurDirXLoc, 1.0)
         #self.__blurProgram.setUniformValue(self.__blurDirYLoc, 0.0)
 
