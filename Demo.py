@@ -7,10 +7,8 @@ http://stackoverflow.com/questions/11192938/compiling-shaders-in-pyqt
 """
 
 """
-Demo
-
-
-radhitya@uwaterloo.ca
+Reza Adhitya Saputra
+reza.adhitya.saputra@gmail.com
 """
 
 import sys

@@ -1,7 +1,8 @@
 
 
 """
-radhitya@uwaterloo.ca
+Reza Adhitya Saputra
+reza.adhitya.saputra@gmail.com
 """
 
 import numpy
@@ -20,14 +21,9 @@ https://raw.githubusercontent.com/azer89/ComicsVectorizer/master/CVUserInterface
 void RenderUtility::DrawFullscreen
 """
 
-### ???
-# http://stackoverflow.com/questions/8016050/pyqt-with-interactive-svg-images
-
-### render svg using frame buffer
-# https://github.com/RSATom/Qt/tree/master/qtsvg/examples/svg/opengl
-
-### parse with something and render using qt
-# http://stackoverflow.com/questions/1359003/svg-example-in-c-c
+### ??? - http://stackoverflow.com/questions/8016050/pyqt-with-interactive-svg-images
+### render svg using frame buffer - https://github.com/RSATom/Qt/tree/master/qtsvg/examples/svg/opengl
+### parse with something and render using qt - http://stackoverflow.com/questions/1359003/svg-example-in-c-c
 
 class MyBufferPainter(object):
 
@@ -49,22 +45,22 @@ class MyBufferPainter(object):
         self.__colorLocation2      = self.__blurProgram.attributeLocation("color")
         self.__use_color_location2 = self.__blurProgram.uniformLocation("use_color")
         self.__mvpMatrixLocation2  = self.__blurProgram.uniformLocation("mvpMatrix")
-        self.__blurResXLoc = self.__blurProgram.uniformLocation("resolutionx")
-        self.__blurResYLoc = self.__blurProgram.uniformLocation("resolutiony")
-        self.__blurRadiusLoc = self.__blurProgram.uniformLocation("radius")
-        self.__blurDirXLoc = self.__blurProgram.uniformLocation("dirx")
-        self.__blurDirYLoc = self.__blurProgram.uniformLocation("diry")
+        self.__blurResXLoc         = self.__blurProgram.uniformLocation("resolutionx")
+        self.__blurResYLoc         = self.__blurProgram.uniformLocation("resolutiony")
+        self.__blurRadiusLoc       = self.__blurProgram.uniformLocation("radius")
+        self.__blurDirXLoc         = self.__blurProgram.uniformLocation("dirx")
+        self.__blurDirYLoc         = self.__blurProgram.uniformLocation("diry")
 
         # Returns -1 if name is not a valid attribute for this shader program.
         print "\n__texCoordLocation2  :", self.__texCoordLocation2, " ", \
-              "\n__vertexLocation2    :", self.__vertexLocation2, " ", \
+              "\n__vertexLocation2    :", self.__vertexLocation2,   " ", \
               "\n__mvpMatrixLocation2 :", self.__mvpMatrixLocation2
 
         # Returns -1 if name is not a valid attribute for this shader program.
-        print "\n__blurResXLoc        :", self.__blurResXLoc, " ", \
-              "\n__blurResYLoc        :", self.__blurResYLoc, " ", \
-              "\n__blurRadiusLoc      :", self.__blurRadiusLoc, " ", \
-              "\n__blurDirXLoc        :", self.__blurDirXLoc, " ", \
+        print "\n__blurResXLoc        :", self.__blurResXLoc,       " ", \
+              "\n__blurResYLoc        :", self.__blurResYLoc,       " ", \
+              "\n__blurRadiusLoc      :", self.__blurRadiusLoc,     " ", \
+              "\n__blurDirXLoc        :", self.__blurDirXLoc,       " ", \
               "\n__blurDirYLoc        :", self.__blurDirYLoc
 
         self.__VAO = None
@@ -146,8 +142,6 @@ class MyBufferPainter(object):
 
         glBindBuffer(GL_ARRAY_BUFFER, 0)
         glBindVertexArray(0)
-
-
 
 
     def prepareFrameRect(self, x_offset, y_offset, frame_width, frame_height, zoom_factor):
@@ -250,10 +244,8 @@ class MyBufferPainter(object):
         #self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, mpvMatrix)
         self.__blurProgram.bind()
         self.__blurProgram.setUniformValue(self.__mvpMatrixLocation2, mpvMatrix)
-
         #print self.__texCoordLocation2, " ", self.__vertexLocation2, " ", self.__mvpMatrixLocation2
         #print self.__blurResXLoc, " ", self.__blurResYLoc, " ", self.__blurRadiusLoc, " ", self.__blurDirXLoc, " ", self.__blurDirYLoc
-
         #self.__blurProgram.setUniformValue(self.__blurRadiusLoc, 1.0 / zoom_factor)
         #self.__blurProgram.setUniformValue(self.__blurResXLoc, frame_width)
         #self.__blurProgram.setUniformValue(self.__blurResYLoc, frame_height)
@@ -261,10 +253,8 @@ class MyBufferPainter(object):
         #self.__blurProgram.setUniformValue(self.__blurDirYLoc, 0.0)
 
         glBindFramebuffer(GL_FRAMEBUFFER, self.__fboId1) ##############################
-
         ###  clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
         ### DRAW JUNK !!!
         #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
         self.__blurProgram.setUniformValue(self.__use_color_location2, 0.0)
@@ -274,32 +264,26 @@ class MyBufferPainter(object):
         glBindVertexArray(0)                ### unbind
         #glBindTexture(GL_TEXTURE_2D, 0)    ### unbind
         #glBindVertexArray(0)               ### unbind
-
-        glBindFramebuffer(GL_FRAMEBUFFER, 0) ##############################
-
         #self.__shaderProgram.release()
         self.__blurProgram.release()
+        glBindFramebuffer(GL_FRAMEBUFFER, 0)
 
-
-        # self.__shaderProgram.bind()
+        # self.__shaderProgram.bind() ##############################
         # self.__shaderProgram.setUniformValue(self.__mvpMatrixLocation, mpvMatrix)
         self.__blurProgram.bind()
         self.__blurProgram.setUniformValue(self.__mvpMatrixLocation, mpvMatrix)
-
         ### DRAW SOMETHING
         #self.__shaderProgram.setUniformValue(self.__use_color_location, 0.0)
-        self.__blurProgram.setUniformValue(self.__use_color_location, 0.0)
+        self.__blurProgram.setUniformValue(self.__use_color_location2, 0.0)
         #glBindTexture(GL_TEXTURE_2D, self.__ori_tex)     ### bind texture
-        glBindTexture(GL_TEXTURE_2D, self.__bufTextureId1) ##############################
+        glBindTexture(GL_TEXTURE_2D, self.__bufTextureId1)
         glBindVertexArray(self.__VAO)       ### bind VAO
         glDrawArrays(GL_TRIANGLES, 0, 6)    ### draw triangle
         glBindVertexArray(0)                ### unbind
         glBindTexture(GL_TEXTURE_2D, 0)     ### unbind
         #glUseProgram(0)                    ### unbind
-
         #self.__shaderProgram.release()
         self.__blurProgram.release()
-
 
 
     """
@@ -365,7 +349,7 @@ class MyBufferPainter(object):
         """
 
         ### FIRST FBO
-        ### create a texture object
+        ### create a texture object ###
         self.__bufTextureId1 = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, self.__bufTextureId1)
         glTexParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -373,28 +357,28 @@ class MyBufferPainter(object):
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, frame_width, frame_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, None)
         glBindTexture(GL_TEXTURE_2D, 0)
 
-        ### create a renderbuffer object to store depth info
+        ### create a renderbuffer object to store depth info ###
         self.__rboId1 = glGenRenderbuffers(1)
         glBindRenderbuffer(GL_RENDERBUFFER, self.__rboId1)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, frame_width, frame_height)
         glBindRenderbuffer(GL_RENDERBUFFER, 0)
 
-        ### create a framebuffer object
+        ### create a framebuffer object ###
         self.__fboId1 = glGenFramebuffers(1)
         glBindFramebuffer(GL_FRAMEBUFFER, self.__fboId1)
 
-        ### attach the texture to FBO color attachment point
+        ### attach the texture to FBO color attachment point ###
         glFramebufferTexture2D(GL_FRAMEBUFFER,        # 1. fbo target: GL_FRAMEBUFFER
                                GL_COLOR_ATTACHMENT0,  # 2. attachment point
                                GL_TEXTURE_2D,         # 3. tex target: GL_TEXTURE_2D
                                self.__bufTextureId1,  # 4. tex ID
                                0)                     # 5. mipmap level: 0(base)
 
-        ### attach the renderbuffer to depth attachment point
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER,      # 1. fbo target: GL_FRAMEBUFFER
+        ### attach the renderbuffer to depth attachment point ###
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER,        # 1. fbo target: GL_FRAMEBUFFER
                                     GL_DEPTH_ATTACHMENT, # 2. attachment point
                                     GL_RENDERBUFFER,     # 3. rbo target: GL_RENDERBUFFER
-                                    self.__fboId1)              # 4. rbo ID
+                                    self.__fboId1)       # 4. rbo ID
 
         ### check FBO status
         fstatus = glCheckFramebufferStatus(GL_FRAMEBUFFER)
@@ -405,7 +389,6 @@ class MyBufferPainter(object):
 
         ### switch back to window-system-provided framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
-
 
         ### SECOND FBO
         ### create a texture object
@@ -448,8 +431,6 @@ class MyBufferPainter(object):
 
         ### switch back to window-system-provided framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
-
-
 
         ### http://www.songho.ca/opengl/gl_fbo.html
         ### create a texture object

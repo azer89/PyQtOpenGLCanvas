@@ -1,6 +1,7 @@
 
 """
-radhitya@uwaterloo.ca
+Reza Adhitya Saputra
+reza.adhitya.saputra@gmail.com
 """
 
 from PyQt4.QtCore import QSize, QRect

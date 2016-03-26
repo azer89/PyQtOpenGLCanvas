@@ -1,6 +1,7 @@
 
 """
-radhitya@uwaterloo.ca
+Reza Adhitya Saputra
+reza.adhitya.saputra@gmail.com
 """
 
 import sys
@@ -25,9 +26,6 @@ from MyBufferPainter import MyBufferPainter
 
 #from PyQt4.QtOpenGL import QGLShaderProgram, QGLShader
 #from PyQt4.QtGui import QMatrix4x4
-
-### didn't work !!!
-#import glsvg
 
 
 class GLWidget(QtOpenGL.QGLWidget):
